@@ -1,3 +1,2 @@
 # event-registration
-
-## An event registration platform for TechHacks.
+An event registration platform for TechHacks.
