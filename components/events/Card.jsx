@@ -14,6 +14,6 @@ export default function Card(props) {
             </div>
             <button className="text-white bg-gray-800 rounded p-3">Sign Up</button>
         </div>
-    )
+    );
 }
 
