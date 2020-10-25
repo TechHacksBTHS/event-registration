@@ -1,10 +1,10 @@
 import Nav from './Nav';
 
 const Layout = ({ children }) => (
-    <div>
+    <div className="overflow-x-hidden">
       <Nav />
         { children }
-      </div>
+    </div>
   )
   
   export default Layout;

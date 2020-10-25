@@ -15,7 +15,7 @@ const upComingEvents = [
 
 const events = () => {
     return (
-        <div className="container m-3 md:m-10">
+        <div className="container px-4 md:px-10 lg:px-16 py-6">
             <h3 className="text-4xl mb-5">Upcoming Events</h3>
             <EventList upComingEvents={upComingEvents} />
         </div>
