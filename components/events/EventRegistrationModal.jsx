@@ -20,20 +20,23 @@ export const EventRegistrationModal = (props) => {
 
                     <form className="w-full">
                         <div className="flex flex-wrap -mx-3 mb-6">
-                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <div className="w-full md:w-1/2 px-3 mb-3 md:mb-6">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="first-name">
                                     First Name
                                 </label>
-                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="first-name" type="text" placeholder="Jane" />
+                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="first-name" type="text" placeholder="Matt" />
                                 {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
                             </div>
-                            <div className="w-full md:w-1/2 px-3">
+                            <div className="w-full md:w-1/2 px-3 mb-3 md:mb-6">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="last-name">
                                     Last Name
                                 </label>
-                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="last-name" type="text" placeholder="Doe" />
+                                <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="last-name" type="text" placeholder="Bilik" />
                             </div>
-                            <div className="w-full px-3">
+                            <div className="w-full px-3 mb-3 md:mb-6">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
+                                    Email
+                                </label>
                                 <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email"  type="email" placeholder="participant@techhacks.nyc"/>
                             </div>
                         </div>
@@ -41,7 +44,7 @@ export const EventRegistrationModal = (props) => {
 
                 </div>
 
-                <button className="uppercase font-bold w-full bg-gray-700 text-lg text-white rounded-b-lg p-3">Participate</button>
+                <button className="uppercase font-bold w-full bg-gray-800 text-lg text-white rounded-b-lg p-3 focus:outline-none">Participate</button>
 
             </div>
         </div>
