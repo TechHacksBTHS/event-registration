@@ -4,7 +4,7 @@ import { EventRegistrationModal } from "./EventRegistrationModal";
 
 function Card(props) {
 
-    const { setRegistrationModal, registrationModal } = useContext(RegistrationModalContext);
+    const { dispatch, registrationModal } = useContext(RegistrationModalContext);
 
     const showModal = () => {
         return <EventRegistrationModal key={props.id} name={props.name} description={props.description}/>
@@ -21,7 +21,7 @@ function Card(props) {
             <div className="mb-4">
                 <p className="text-3xl text-gray-900 font-bold">{props.name}</p>
             </div>
-            <button className="text-white bg-gray-800 rounded p-3" onClick={() => setRegistrationModal(props.id)}>Attend</button>
+            <button className="text-white bg-gray-800 rounded p-3" onClick={() => dispatch({type: "SHOW_MODAL", id: props.id})}>Attend</button>
 
             {registrationModal == props.id ? showModal() : null}
         </div>
