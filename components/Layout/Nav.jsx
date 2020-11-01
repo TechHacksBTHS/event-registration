@@ -19,8 +19,8 @@ const Nav = () => {
                 <div className="relative flex items-center justify-between min-h-full sm:h-16 py-3">
                     <div className="flex-1 flex flex-col sm:mt-1 sm:flex-row items-center justify-center sm:items-stretch sm:justify-start">
                         <div className="flex-shrink-0">
-                            <img className="block lg:hidden h-10 w-auto" src="images/white_logo_dark_bg.PNG" alt="TechHacks logo" />
-                            <img className="hidden lg:block h-10 w-auto" src="images/white_logo_dark_bg.PNG" alt="TechHacks logo" />
+                            <img className="block lg:hidden h-10 w-auto" src="logo.svg" alt="TechHacks logo" />
+                            <img className="hidden lg:block h-10 w-auto" src="logo.svg" alt="TechHacks logo" />
                         </div>
                         
                         <div className="block absolute right-0 sm:hidden">

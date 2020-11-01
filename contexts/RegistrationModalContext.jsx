@@ -1,10 +1,11 @@
-import React, { createContext, useState, useMemo } from "react";
+import React, { createContext, useState, useMemo, useReducer } from "react";
+import { registrationModalReducer } from "../reducers/registrationModalReducer";
 
 export const RegistrationModalContext = createContext(null);
 
 const RegistrationModalContextProvider = (props) => {
-    const [registrationModal, setRegistrationModal] = useState(-1);
-    const value = useMemo(() => ({ registrationModal, setRegistrationModal }), [registrationModal, setRegistrationModal]);
+    const [registrationModal, dispatch] = useReducer(registrationModalReducer, -1);
+    const value = useMemo(() => ({ registrationModal, dispatch }), [registrationModal, dispatch]);
 
     return (
         <RegistrationModalContext.Provider value={value}>
