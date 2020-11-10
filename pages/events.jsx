@@ -1,22 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import EventList from '../components/events/EventList';
+import fire from "../config/fire-config";
 
-const upComingEvents = [
-    {
-        name: "Technight 2020",
-        type: "Hackathon",
-        iconURL: "/images/042-keyboard.svg",
-        description: "Join us for the best hackathon yet!"
-    },
-    {
-        name: "Technight 2021",
-        type: "Hackathon",
-        iconURL: "/images/001-cyber security.svg",
-        description: "Join us for the best hackathon yet!"
-    }
-];
- 
 const events = () => {
+    const [upComingEvents, setUpComingEvents] = useState([]); 
+
+    useEffect(() => {
+        fire.firestore().collection("events").onSnapshot(snap => {
+            const events = snap.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setUpComingEvents(events);
+        })
+    }, []);
 
     return (
         <div className="container px-4 md:px-10 lg:px-16 py-6">
