@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { RegistrationModalContext } from "../../contexts/RegistrationModalContext";
+import { RegistrationModalContext } from "../../../contexts/RegistrationModalContext";
 import { EventRegistrationModal } from "./EventRegistrationModal";
 
 function Card(props) {

@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
-import { RegistrationModalContext } from "../../contexts/RegistrationModalContext";
-import fire from "../../config/fire-config";
+import { RegistrationModalContext } from "../../../contexts/RegistrationModalContext";
+import fire from "../../../config/fire-config";
+import { RegistrationAlertContext } from "../../../contexts/RegistrationAlertContext";
 
 export const EventRegistrationModal = (props) => {
-    const { dispatch } = useContext(RegistrationModalContext);
+    const dispatchModal = useContext(RegistrationModalContext).dispatch;
+    const dispatchAlert = useContext(RegistrationAlertContext).dispatch;
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -21,7 +23,8 @@ export const EventRegistrationModal = (props) => {
             email: email
         });
 
-        dispatch({type: "DISABLE"});
+        dispatchModal({type: "DISABLE"});
+        dispatchAlert({type: "SUCCESS", payload: props.name});
     }
 
     return (
@@ -30,7 +33,7 @@ export const EventRegistrationModal = (props) => {
                 <div className="flex flex-col items-start p-4">
                     <div className="flex items-center w-full">
                         <div className="text-gray-900 font-bold text-3xl text-center w-full">{props.name}</div>
-                        <button onClick={() => dispatch({type: "DISABLE"})} className="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer">
+                        <button onClick={() => dispatchModal({type: "DISABLE"})} className="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
                                 <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
                             </svg>
