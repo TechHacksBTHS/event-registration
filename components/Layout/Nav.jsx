@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from "next/router";
+import { signInWithGoogleOAuth } from "../../services/authentication";
 
 const toggleNav = () => {
     document.getElementById("nav-content").classList.toggle("hidden");
@@ -33,6 +34,13 @@ const Nav = () => {
                             <div className="flex flex-col sm:flex-row">
                                 <Link href="/"><button className={router.pathname == "/" ? activeClasses : nonActiveClasses}>Home</button></Link>
                                 <Link href="/events"><button className={router.pathname == "/events" ? activeClasses + " sm:ml-4" : nonActiveClasses + " sm:ml-4"}>Events</button></Link>
+                            </div>
+                        </div>
+
+                        {/* Sign In with Google */}
+                        <div className="block sm:absolute sm:right-0 sm:block text-white">
+                            <div className="flex flex-col sm:flex-row">
+                                <button onClick={() => signInWithGoogleOAuth()} className={nonActiveClasses}>Sign In</button>
                             </div>
                         </div>
                     </div>

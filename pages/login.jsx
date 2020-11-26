@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Fire from '../config/fire-config';
 
 export default function login() {
 
@@ -10,6 +11,13 @@ export default function login() {
         // console.log(password);
 
         e.preventDefault();
+
+        Fire.auth().signInWithEmailAndPassword(email, password).then((response) => {
+            console.log(response.user);
+            console.log(response.user.uid);
+        }).catch((error) => {
+            console.log(error.message);
+        });
 
         setEmail("");
         setPassword("");
