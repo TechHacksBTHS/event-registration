@@ -1,7 +1,28 @@
-import React from 'react'
-import DashboardCard from './Card.jsx'
+import React, { useState, useEffect } from 'react';
+import DashboardCard from './Card.jsx';
+import fire from '../../../../config/fire-config';
+
+const renderEvent = (upComingEvents) => {
+    if (upComingEvents) {
+        return upComingEvents.map((item) => {
+            return <DashboardCard key={item.id} logo={"white_logo_dark_bg.PNG"} name={item.name} type={item.type} sponsors={item.sponsors} status={item.status} date={"N/A"} />
+        });
+    }
+}
 
 export default function DashboardEvents() {
+    const [upComingEvents, setUpComingEvents] = useState([]); 
+
+    useEffect(() => {
+        fire.firestore().collection("events").onSnapshot(snap => {
+            const events = snap.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setUpComingEvents(events);
+        });
+    }, []);
+
     return (
         <main
             className="flex-1 flex flex-col bg-gray-100 dark:bg-gray-700 transition
@@ -84,7 +105,7 @@ export default function DashboardEvents() {
 
                 </div>
 
-                <DashboardCard />
+                {renderEvent(upComingEvents)}
 
             </div>
 

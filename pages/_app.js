@@ -3,16 +3,19 @@ import '../styles/globals.css';
 import '../components/Layout';
 import RegistrationModalContextProvider from '../contexts/RegistrationModalContext';
 import RegistrationAlertContextProvider from '../contexts/RegistrationAlertContext';
+import AuthContextProvider from '../contexts/AuthContext';
 
 function MyApp({ Component, pageProps }) {
   return (
-  <Layout>
-    <RegistrationModalContextProvider>
-      <RegistrationAlertContextProvider>
-        <Component {...pageProps} />
-      </RegistrationAlertContextProvider>
-    </RegistrationModalContextProvider>
-  </Layout>
+    <AuthContextProvider>
+      <Layout>
+        <RegistrationModalContextProvider>
+          <RegistrationAlertContextProvider>
+            <Component {...pageProps} />
+          </RegistrationAlertContextProvider>
+        </RegistrationModalContextProvider>
+      </Layout>
+    </AuthContextProvider>
   );
 }
 

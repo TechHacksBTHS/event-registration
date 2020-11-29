@@ -2,8 +2,41 @@ import React, { useState } from 'react';
 import DashboardEvents from '../components/Pages/dashboard/DashboardEvents';
 import DashboardHome from '../components/Pages/dashboard/DashboardHome';
 import DashboardUsers from '../components/Pages/dashboard/DashboardUsers';
+import nookies from 'nookies';
+import firebaseAdmin from '../config/fireAdmin-config';
+import { fetchUser } from '../services/backend/database';
 
-export default function dashboard() {
+export const getServerSideProps = async (ctx) => {
+    try {
+    const cookies = nookies.get(ctx);
+    const verifiedToken = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+
+    const { uid } = verifiedToken;
+    const userData = await fetchUser(uid);
+
+    return {
+        props: {
+            name: userData.name,
+            permissions: userData.permissions,
+            accountIcon: verifiedToken.picture
+        }
+    };
+
+    } catch (err){
+        //Error in validating the token
+
+        // console.log(err);
+        ctx.res.writeHead(302, { Location: '/' });
+        ctx.res.end();
+
+        //Props will not matter b/c the route has already been redirected
+        return { props: {} };
+    }
+
+
+}
+
+export default function dashboard(props) {
     const [currentSection, setCurrentSection] = useState("DashboardHome");
 
     const showCurrentSection = () => {
@@ -33,7 +66,7 @@ export default function dashboard() {
                 <div className="flex flex-row border-b items-center justify-between pb-2">
                     {/* <!-- Hearder --> */}
                     <span className="text-lg font-semibold capitalize dark:text-gray-300">
-                        my admin
+                        my dashboard
                     </span>
                 </div>
 
@@ -41,14 +74,14 @@ export default function dashboard() {
                     {/* <!-- User info --> */}
                     <img
                         className="h-12 w-12 rounded-full object-cover"
-                        src="https://i.pinimg.com/originals/f3/e1/b8/f3e1b8019f160f88531d8af792716b4f.png"
-                        alt="enoshima profile" />
+                        src={props.accountIcon}
+                        alt="profile" />
                     <h2
                         className="mt-4 text-xl dark:text-gray-300 font-extrabold capitalize">
-                        Mark Antony
+                        { props.name }
                     </h2>
                     <span className="text-sm dark:text-gray-300 font-semibold text-green-600 dark:text-green-300">
-                        Admin
+                        { props.permissions }
                     </span>
                 </div>
 

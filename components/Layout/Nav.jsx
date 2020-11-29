@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { useRouter } from "next/router";
-import { signInWithGoogleOAuth } from "../../services/authentication";
+import { signInWithGoogleOAuth, signOut } from "../../services/authentication";
+import { useAuth } from "../../contexts/AuthContext";
 
 const toggleNav = () => {
     document.getElementById("nav-content").classList.toggle("hidden");
 }
-
 
 const Nav = () => {
 
@@ -13,6 +13,9 @@ const Nav = () => {
     const nonActiveClasses = "px-3 py-2 sm:flex-grow rounded-md text-lg sm:text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none";
 
     const router = useRouter();
+    const { user } = useAuth();
+
+    // console.log(user);
 
     return (
         <nav className="bg-gray-800">
@@ -34,13 +37,14 @@ const Nav = () => {
                             <div className="flex flex-col sm:flex-row">
                                 <Link href="/"><button className={router.pathname == "/" ? activeClasses : nonActiveClasses}>Home</button></Link>
                                 <Link href="/events"><button className={router.pathname == "/events" ? activeClasses + " sm:ml-4" : nonActiveClasses + " sm:ml-4"}>Events</button></Link>
+                                <Link href="/demo"><button className={nonActiveClasses + " sm:ml-4"}>Debug</button></Link>
                             </div>
                         </div>
 
                         {/* Sign In with Google */}
                         <div className="block sm:absolute sm:right-0 sm:block text-white">
                             <div className="flex flex-col sm:flex-row">
-                                <button onClick={() => signInWithGoogleOAuth()} className={nonActiveClasses}>Sign In</button>
+                                { user == null ? <button onClick={ async () => await signInWithGoogleOAuth()} className={nonActiveClasses}>Sign In</button> : <button onClick={ async () => await signOut()} className={nonActiveClasses}>Log out</button>}
                             </div>
                         </div>
                     </div>

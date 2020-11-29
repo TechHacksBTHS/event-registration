@@ -1,4 +1,4 @@
-import React, { createContext, useState, useMemo, useReducer } from "react";
+import React, { createContext, useMemo, useReducer } from "react";
 import { registrationModalReducer } from "../reducers/registrationModalReducer";
 
 export const RegistrationModalContext = createContext(null);
