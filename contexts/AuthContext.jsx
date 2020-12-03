@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import nookies from 'nookies';
 import Fire from '../config/fire-config';
+// import { fetchUser } from "../services/backend/database";
 
 const AuthContext = createContext({
   user: null,
@@ -18,11 +19,16 @@ export default function AuthContextProvider({ children }) {
         nookies.set(undefined, 'token', '');
       } else {
         const token = await firebaseUser.getIdToken();
-        //Pending use case
+        
+        // const populatedUser = await fetchUser(firebaseUser.uid);
+        // console.log(populatedUser);
+
+        //Pending use case (probably going be used for routes that need the user information but are protected already - meaning these data will NOT be used for access control)
         setUser({
             "uid": firebaseUser.uid,
             "email": firebaseUser.email,
-            "name": firebaseUser.displayName
+            "name": firebaseUser.displayName,
+            // "permissions": populatedUser.permissions
         });
         nookies.set(undefined, 'token', token);
       }

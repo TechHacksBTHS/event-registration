@@ -3,7 +3,7 @@ import DashboardEvents from '../components/Pages/dashboard/DashboardEvents';
 import DashboardHome from '../components/Pages/dashboard/DashboardHome';
 import DashboardUsers from '../components/Pages/dashboard/DashboardUsers';
 import nookies from 'nookies';
-import firebaseAdmin from '../config/fireAdmin-config';
+import firebaseAdmin from '../config/FirebaseAdminConfig';
 import { fetchUser } from '../services/backend/database';
 
 export const getServerSideProps = async (ctx) => {
@@ -13,6 +13,13 @@ export const getServerSideProps = async (ctx) => {
 
     const { uid } = verifiedToken;
     const userData = await fetchUser(uid);
+
+    //Move the user out if it does not have suffcient permission
+    if (userData.permissions != "admin"){
+        ctx.res.writeHead(302, { Location: "/"});
+        ctx.res.end();
+        return { props: {}};
+    }
 
     return {
         props: {
@@ -24,16 +31,11 @@ export const getServerSideProps = async (ctx) => {
 
     } catch (err){
         //Error in validating the token
-
-        // console.log(err);
         ctx.res.writeHead(302, { Location: '/' });
         ctx.res.end();
-
         //Props will not matter b/c the route has already been redirected
         return { props: {} };
     }
-
-
 }
 
 export default function dashboard(props) {

@@ -1,9 +1,8 @@
-import Fire from "../config/fire-config";
+import Fire from "../../config/fire-config";
 
 const provider = new Fire.auth.GoogleAuthProvider();
 
 const signInWithGoogleOAuth = async () => {
-
     const result = await Fire.auth().signInWithPopup(provider);
     await createUser(result);
 }

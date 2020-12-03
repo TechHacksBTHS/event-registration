@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from "next/router";
-import { signInWithGoogleOAuth, signOut } from "../../services/authentication";
+import { signInWithGoogleOAuth, signOut } from "../../services/frontend/authentication";
 import { useAuth } from "../../contexts/AuthContext";
 
 const toggleNav = () => {
@@ -15,7 +15,7 @@ const Nav = () => {
     const router = useRouter();
     const { user } = useAuth();
 
-    // console.log(user);
+    console.log(user);
 
     return (
         <nav className="bg-gray-800">

@@ -1,6 +1,6 @@
 import React from 'react';
 import nookies from 'nookies';
-import firebaseAdmin from '../config/fireAdmin-config';
+import firebaseAdmin from '../config/FirebaseAdminConfig';
 import { fetchUser } from '../services/backend/database';
 
 export const getServerSideProps = async (ctx) => {
