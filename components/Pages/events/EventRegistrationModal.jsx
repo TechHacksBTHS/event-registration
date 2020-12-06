@@ -70,7 +70,7 @@ export const EventRegistrationModal = (props) => {
         setEmail(value);
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
 
         if (firstName.length > 0 && lastName.length > 0 && email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
             // console.log(firstName + " " + lastName + " " + email);
