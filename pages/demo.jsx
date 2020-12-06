@@ -4,6 +4,7 @@ import firebaseAdmin from '../config/FirebaseAdminConfig';
 import { fetchUserWithUID } from './api/fetch_user/[uid]';
 
 export const getServerSideProps = async (ctx) => {
+
     try {
         const cookies = nookies.get(ctx);
         const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
