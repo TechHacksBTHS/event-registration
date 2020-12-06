@@ -1,7 +1,7 @@
 import React from 'react';
 import nookies from 'nookies';
 import firebaseAdmin from '../config/FirebaseAdminConfig';
-import { fetchUser } from '../services/backend/database';
+import { fetchUserWithUID } from './api/fetch_user/[uid]';
 
 export const getServerSideProps = async (ctx) => {
     try {
@@ -12,13 +12,13 @@ export const getServerSideProps = async (ctx) => {
         const { uid } = token;
     
         // Data fetching using backend services
-        const userData = await fetchUser(uid);
+        const data = await fetchUserWithUID(uid);
 
         return {
           props: { 
               uid: uid,
-              name: userData.name,
-              permissions: userData.permissions
+              name: data.name,
+              permissions: data.permissions
             },
         };
       } catch (err) {

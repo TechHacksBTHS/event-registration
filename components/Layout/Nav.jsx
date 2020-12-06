@@ -15,7 +15,7 @@ const Nav = () => {
     const router = useRouter();
     const { user } = useAuth();
 
-    console.log(user);
+    // console.log(user);
 
     return (
         <nav className="bg-gray-800">
@@ -37,7 +37,7 @@ const Nav = () => {
                             <div className="flex flex-col sm:flex-row">
                                 <Link href="/"><button className={router.pathname == "/" ? activeClasses : nonActiveClasses}>Home</button></Link>
                                 <Link href="/events"><button className={router.pathname == "/events" ? activeClasses + " sm:ml-4" : nonActiveClasses + " sm:ml-4"}>Events</button></Link>
-                                <Link href="/demo"><button className={nonActiveClasses + " sm:ml-4"}>Debug</button></Link>
+                                { user && user.permissions === "admin" ? <Link href="/demo"><button className={nonActiveClasses + " sm:ml-4"}>Debug</button></Link> : null}
                             </div>
                         </div>
 

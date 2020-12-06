@@ -4,7 +4,7 @@ import DashboardHome from '../components/Pages/dashboard/DashboardHome';
 import DashboardUsers from '../components/Pages/dashboard/DashboardUsers';
 import nookies from 'nookies';
 import firebaseAdmin from '../config/FirebaseAdminConfig';
-import { fetchUser } from '../services/backend/database';
+import { fetchUserWithUID } from '../pages/api/fetch_user/[uid]';
 
 export const getServerSideProps = async (ctx) => {
     try {
@@ -12,7 +12,7 @@ export const getServerSideProps = async (ctx) => {
     const verifiedToken = await firebaseAdmin.auth().verifyIdToken(cookies.token);
 
     const { uid } = verifiedToken;
-    const userData = await fetchUser(uid);
+    const userData = await fetchUserWithUID(uid);
 
     //Move the user out if it does not have suffcient permission
     if (userData.permissions != "admin"){
@@ -51,7 +51,7 @@ export default function dashboard(props) {
         }
     }
 
-    const activeClasses = "rounded-lg p-3 shadow bg-white dark:bg-gray-200 -ml-4 text-gray-600";
+    const activeClasses = "rounded-lg p-3 shadow bg-white dark:bg-gray-200 -ml-4 text-gray-700";
 
     const getCSSClasses = (name) => {
         if (name === currentSection){
@@ -126,14 +126,15 @@ export default function dashboard(props) {
                     </li>
 
                     <li className={getCSSClasses("DashboardUsers")}>
-                        <button onClick={() => setCurrentSection("DashboardUsers")} className="flex focus:outline-none">
-                            <svg className="fill-current w-6" viewBox="0 0 24 24">
+                        {/* <button onClick={() => setCurrentSection("DashboardUsers")} className="flex focus:outline-none"> */}
+                        <button className="flex focus:outline-none">
+                            <svg className="fill-current w-6 text-gray-400" viewBox="0 0 24 24">
                                 <path
                                     d="M12 4a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4 4 4 0
                                     014-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4
                                     8-4z"></path>
                             </svg>
-                            <span className="ml-2 capitalize font-medium">users</span>
+                            <span className="ml-2 capitalize font-medium text-gray-400">users</span>
                         </button>
                     </li>
 
