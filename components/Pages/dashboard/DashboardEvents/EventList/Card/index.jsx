@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function DashboardCard({logo, name, type, sponsors, status, date}) {
+export default function DashboardCard({logo, name, uid, type, sponsors, status, date, showSignups}) {
     return (
         <div
             className="mt-8 mb-4 flex px-4 py-4 justify-between bg-white
-            dark:bg-gray-600 shadow-xl rounded-lg cursor-pointer">
+            dark:bg-gray-600 shadow-xl rounded-lg cursor-pointer" onClick={() => showSignups(uid)}>
             {/* <!-- Card --> */}
 
             <div className="flex justify-between">

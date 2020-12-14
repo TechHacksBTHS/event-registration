@@ -15,8 +15,6 @@ const Nav = () => {
     const router = useRouter();
     const { user } = useAuth();
 
-    // console.log(user);
-
     return (
         <nav className="bg-gray-800">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -36,6 +34,7 @@ const Nav = () => {
                         <div id="nav-content" className="hidden sm:block sm:ml-6 w-4/5 sm:w-4">
                             <div className="flex flex-col sm:flex-row">
                                 <Link href="/"><button className={router.pathname == "/" ? activeClasses : nonActiveClasses}>Home</button></Link>
+                                { user ? <Link href="/dashboard"><button className={router.pathname == "/dashboard" ? activeClasses + " sm:ml-4" : nonActiveClasses + " sm:ml-4"}>Dashboard</button></Link> : null}
                                 <Link href="/events"><button className={router.pathname == "/events" ? activeClasses + " sm:ml-4" : nonActiveClasses + " sm:ml-4"}>Events</button></Link>
                                 { user && user.permissions === "admin" ? <Link href="/demo"><button className={nonActiveClasses + " sm:ml-4"}>Debug</button></Link> : null}
                             </div>

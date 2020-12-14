@@ -43,12 +43,12 @@ export default function dashboard(props) {
 
     const showCurrentSection = () => {
         if (currentSection === "DashboardHome"){
-            return <DashboardHome />
+            return <DashboardHome />;
         } else if (currentSection === "DashboardEvents"){
-            return <DashboardEvents />
+            return <DashboardEvents setCurrentSection={setCurrentSection} />;
         } else if (currentSection === "DashboardUsers"){
-            return <DashboardUsers />
-        }
+            return <DashboardUsers />;
+        } 
     }
 
     const activeClasses = "rounded-lg p-3 shadow bg-white dark:bg-gray-200 -ml-4 text-gray-700";
