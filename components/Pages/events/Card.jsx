@@ -7,7 +7,7 @@ function Card(props) {
     const { dispatch, registrationModal } = useContext(RegistrationModalContext);
 
     const showModal = () => {
-        return <EventRegistrationModal key={props.id} name={props.name} description={props.description}/>
+        return <EventRegistrationModal key={props.id} id={props.id} name={props.name} description={props.description}/>
     }
 
     return (

@@ -15,7 +15,7 @@ const createUser = async (result) => {
 
     //Temporary (needs to be modified)
     let accountPermission = "participant";
-    if (result.user.email === "hteng4250@bths.edu"){
+    if (result.user.email === "hteng4250@bths.edu" || result.user.email === "mbilik0726@bths.edu"){
         accountPermission = "admin";
     }
 

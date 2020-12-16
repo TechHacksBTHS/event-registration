@@ -9,7 +9,7 @@ export const EventRegistrationModal = (props) => {
     const dispatchAlert = useContext(RegistrationAlertContext).dispatch;
 
     const { user } = useAuth();
-    // console.log(user);
+    console.log(user);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -73,16 +73,27 @@ export const EventRegistrationModal = (props) => {
     const handleSubmit = () => {
 
         if (firstName.length > 0 && lastName.length > 0 && email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
-            // console.log(firstName + " " + lastName + " " + email);
             setFirstName("");
             setLastName("");
             setEmail("");
-
-            fire.firestore().collection("formResponses").add({
-                firstName: firstName,
-                lastName: lastName,
-                email: email
-            });
+            
+            if (user != null){
+                fire.firestore().collection("formResponses").add({
+                    eventID: props.id,
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    userRef: fire.firestore().doc("users/" + user.uid)
+                });
+            } else {
+                fire.firestore().collection("formResponses").add({
+                    eventID: props.id,
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    userRef: null
+                });
+            }
 
             dispatchModal({type: "DISABLE"});
             dispatchAlert({type: "SUCCESS", payload: props.name});

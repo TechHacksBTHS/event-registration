@@ -1,19 +1,30 @@
 import Axios from 'axios';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Participant from './Participant';
 
 export default function SignUpList({detailedView, setDetailedView}) {
+
+    const [responses, setResponses] = useState([]);
+
+    useEffect(() => {
+        Axios.get("/api/fetch_signups/" + detailedView).then((result) => {
+            setResponses(result.data);
+        });
+    }, []);
 
     const returnToEventList = () => {
         setDetailedView(-1);
     }
 
     const renderParticipants = () => {
-        return <Participant name="Participant Smith" email="participant@techhacks.nyc" profile="https://i.pinimg.com/originals/ee/e7/5d/eee75d6e875e7e205a1394aaa96fad12.png" status="signed up" type="participant" />;
+        return responses.map((response) => {
+            if (response != null){
+                return <Participant key={response.user.uid} name={response.user.name} email={response.user.email} profile={"https://i.pinimg.com/originals/ee/e7/5d/eee75d6e875e7e205a1394aaa96fad12.png"} status="signed up" type={response.user.permissions} />; 
+            }
+            return null;
+        });
     }
-
-    Axios.get("/api/fetch_signups/" + detailedView).then((result) => console.log(result));
-
+    
     return (
             <div className="mx-10 my-8 flex-1">
                 <div className="flex flex-col">
