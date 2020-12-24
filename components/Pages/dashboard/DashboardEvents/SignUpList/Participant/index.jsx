@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function Participant({name, email, profile, status, type}) {
+    const statusColor = status === "signed up" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800";
     return (
         <tr>
             <td className="px-6 py-4 whitespace-nowrap">
@@ -19,7 +20,7 @@ export default function Participant({name, email, profile, status, type}) {
                 </div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                <span className={"px-2 inline-flex text-xs leading-5 font-semibold rounded-full " + statusColor}>
                     {status}
                 </span>
             </td>

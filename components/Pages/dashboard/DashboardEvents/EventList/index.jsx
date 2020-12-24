@@ -12,7 +12,7 @@ export default function EventList({setDetailedView}) {
     const renderEvents = (upComingEvents) => {
         if (upComingEvents) {
             return upComingEvents.map((item) => {
-                return <DashboardCard key={item.id} uid={item.id} showSignups={showSignups} logo={"white_logo_dark_bg.PNG"} name={item.name} type={item.type} sponsors={item.sponsors} status={item.status} date={"N/A"} />
+                return <DashboardCard key={item.id} uid={item.id} showSignups={showSignups} logo={"white_logo_dark_bg.PNG"} name={item.name} type={item.type} date={item.date} />
             });
         }
     }
@@ -74,27 +74,6 @@ export default function EventList({setDetailedView}) {
                         <div className="flex capitalize">
                             {/* <!-- Right side --> */}
 
-                            <span className="mr-16 pr-2 flex items-center">
-                                sponsors
-                                <svg
-                                    className="ml-1 h-5 w-5 fill-current"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2
-                                        19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z"></path>
-                                </svg>
-                            </span>
-
-                            <span className="mr-12 flex items-center">
-                                status
-                                <svg
-                                    className="ml-1 h-5 w-5 fill-current"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2
-                                        19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z"></path>
-                                </svg>
-                            </span>
                             <span className="mr-16 flex items-center">
                                 date
                                 <svg

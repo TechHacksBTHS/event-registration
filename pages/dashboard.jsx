@@ -15,11 +15,11 @@ export const getServerSideProps = async (ctx) => {
     const userData = await fetchUserWithUID(uid);
 
     //Move the user out if it does not have suffcient permission
-    if (userData.permissions != "admin"){
-        ctx.res.writeHead(302, { Location: "/"});
-        ctx.res.end();
-        return { props: {}};
-    }
+    // if (userData.permissions != "admin"){
+    //     ctx.res.writeHead(302, { Location: "/"});
+    //     ctx.res.end();
+    //     return { props: {}};
+    // }
 
     return {
         props: {

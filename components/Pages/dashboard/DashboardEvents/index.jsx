@@ -11,5 +11,4 @@ export default function DashboardEvents() {
         return <SignUpList detailedView={detailedView} setDetailedView={setDetailedView} />
     }
     
-    return null;
 }
