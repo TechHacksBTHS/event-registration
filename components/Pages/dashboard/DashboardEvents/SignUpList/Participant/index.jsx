@@ -1,6 +1,8 @@
 import React from 'react';
+import { EditButton } from './EditButton';
 
-export default function Participant({name, email, profile, status, type}) {
+export default function Participant({uid, name, email, profile, status, type, updateSignups}) {
+
     const statusColor = status === "signed up" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800";
     return (
         <tr>
@@ -19,16 +21,18 @@ export default function Participant({name, email, profile, status, type}) {
                 </div>
                 </div>
             </td>
-            <td className="px-6 py-4 whitespace-nowrap">
+            <td className="px-6 py-4 whitespace-nowrap capitalize">
                 <span className={"px-2 inline-flex text-xs leading-5 font-semibold rounded-full " + statusColor}>
                     {status}
                 </span>
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">
                 {type}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a href="#" className="text-indigo-600 hover:text-indigo-900">Edit</a>
+
+                <EditButton uid={uid} updateSignups={updateSignups}/>
+                
             </td>
         </tr>
     );

@@ -7,10 +7,14 @@ export default function SignUpList({detailedView, setDetailedView}) {
 
     const [responses, setResponses] = useState([]);
 
-    useEffect(() => {
-        Axios.get("/api/fetch_signups/" + detailedView).then((result) => {
+    const updateSignups = async () => {
+        Axios.get("/api/signups/" + detailedView).then((result) => {
             setResponses(result.data);
         });
+    }
+
+    useEffect(async () => {
+        await updateSignups();
     }, []);
 
     const returnToEventList = () => {
@@ -18,19 +22,17 @@ export default function SignUpList({detailedView, setDetailedView}) {
     }
 
     const renderParticipants = () => {
-        console.log(responses);
-
         const { user } = useAuth();
 
         if (user.permissions !== "admin" && responses.length == 0){
             return [
-                <Participant name={user.name} email={user.email} profile={"https://i.pinimg.com/originals/ee/e7/5d/eee75d6e875e7e205a1394aaa96fad12.png"} status={"not signed up"} type={user.permissions} />
+                <Participant updateSignups={updateSignups} name={user.name} email={user.email} profile={"https://i.pinimg.com/originals/ee/e7/5d/eee75d6e875e7e205a1394aaa96fad12.png"} status={"not signed up"} type={user.permissions} />
             ]
         }
 
         return responses.map((response) => {
             if (response != null){
-                return <Participant key={response.user.uid} name={response.user.name} email={response.user.email} profile={"https://i.pinimg.com/originals/ee/e7/5d/eee75d6e875e7e205a1394aaa96fad12.png"} status="signed up" type={response.user.permissions} />; 
+                return <Participant key={response.uid} uid={response.uid} updateSignups={updateSignups} name={response.user.name} email={response.user.email} profile={"https://i.pinimg.com/originals/ee/e7/5d/eee75d6e875e7e205a1394aaa96fad12.png"} status="signed up" type={response.user.permissions} />; 
             }
             return null;
         });

@@ -2,6 +2,12 @@ import firebaseAdmin from '../../../config/FirebaseAdminConfig';
 import { fetchUserWithUID } from '../fetch_user/[uid]';
 import { parseCookies } from 'nookies';
 
+const getUserData = async (req) => {
+    const cookies = parseCookies({ req });
+    const verifiedToken = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+    return await fetchUserWithUID(verifiedToken.uid);
+}
+
 const participantData = async (doc, userData) => {
   if (doc.data().userRef != null){
     const userDoc = await doc.data().userRef.get();
@@ -65,15 +71,13 @@ export const fetchSignUpsWithUID = async (uid, userData) => {
 }
 
 export default async (req, res) => {
-  if (req.method === "GET"){
-    const {
-      query: { uid },
-    } = req;
+  const {
+    query: { uid },
+  } = req;
 
+  if (req.method === "GET"){ //GET REQUEST
     try {
-      const cookies = parseCookies({ req });
-      const verifiedToken = await firebaseAdmin.auth().verifyIdToken(cookies.token);
-      const userData = await fetchUserWithUID(verifiedToken.uid);
+      const userData = await getUserData(req);
 
       res.statusCode = 200;
       res.json(await fetchSignUpsWithUID(uid, userData));
@@ -81,6 +85,20 @@ export default async (req, res) => {
     } catch(err) {
       res.statusCode = 200;
       res.json([]);
+    }
+  } else if (req.method === "DELETE"){ //DELETE REQUEST
+    try {
+      const userData = await getUserData(req);
+
+      if (userData.permissions === "admin"){
+        await firebaseAdmin.firestore().collection("formResponses").doc(uid).delete();
+        res.statusCode = 200;
+        res.json("success");
+      }
+      res.statusCode = 401;
+    } catch(err) {
+      console.log(err);
+      res.statusCode = 401;
     }
   }
 }
