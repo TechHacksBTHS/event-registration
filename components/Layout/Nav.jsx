@@ -36,14 +36,24 @@ const Nav = () => {
                                 <Link href="/"><button className={router.pathname == "/" ? activeClasses : nonActiveClasses}>Home</button></Link>
                                 { user ? <Link href="/dashboard"><button className={router.pathname == "/dashboard" ? activeClasses + " sm:ml-4" : nonActiveClasses + " sm:ml-4"}>Dashboard</button></Link> : null}
                                 <Link href="/events"><button className={router.pathname == "/events" ? activeClasses + " sm:ml-4" : nonActiveClasses + " sm:ml-4"}>Events</button></Link>
-                                { user && user.permissions === "admin" ? <Link href="/demo"><button className={nonActiveClasses + " sm:ml-4"}>Debug</button></Link> : null}
                             </div>
                         </div>
 
                         {/* Sign In with Google */}
                         <div className="block sm:absolute sm:right-0 sm:block text-white">
                             <div className="flex flex-col sm:flex-row">
-                                { user == null ? <button onClick={ async () => await signInWithGoogleOAuth()} className={nonActiveClasses}>Sign In</button> : <button onClick={ async () => await signOut()} className={nonActiveClasses}>Log out</button>}
+                                { user == null ? 
+                                <button onClick={ async () => await signInWithGoogleOAuth()} className={nonActiveClasses}>Sign In</button> : 
+                                    <button onClick={ async () => await signOut()} className={nonActiveClasses + " flex items-center"}>
+                                        <svg className="fill-current h-5 w-5" viewBox="0 0 24 24">
+                                            <path
+                                                d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 012
+                                                2v2h-2V4H5v16h9v-2h2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2
+                                                0 012-2h9z"></path>
+                                        </svg>
+                                        <span className="mx-2">Log Out</span>
+                                    </button>
+                                }
                             </div>
                         </div>
                     </div>

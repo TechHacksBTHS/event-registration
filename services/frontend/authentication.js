@@ -1,4 +1,5 @@
 import Fire from "../../config/fire-config";
+import Router from "next/router";
 
 const provider = new Fire.auth.GoogleAuthProvider();
 
@@ -9,6 +10,7 @@ const signInWithGoogleOAuth = async () => {
 
 const signOut = async () => {
     await Fire.auth().signOut();
+    Router.push("/");
 }
 
 const createUser = async (result) => {

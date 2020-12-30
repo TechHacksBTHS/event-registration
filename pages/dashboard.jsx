@@ -5,6 +5,7 @@ import DashboardUsers from '../components/Pages/dashboard/DashboardUsers';
 import nookies from 'nookies';
 import firebaseAdmin from '../config/FirebaseAdminConfig';
 import { fetchUserWithUID } from '../pages/api/fetch_user/[uid]';
+import { signOut } from '../services/frontend/authentication';
 
 export const getServerSideProps = async (ctx) => {
     try {
@@ -13,13 +14,6 @@ export const getServerSideProps = async (ctx) => {
 
     const { uid } = verifiedToken;
     const userData = await fetchUserWithUID(uid);
-
-    //Move the user out if it does not have suffcient permission
-    // if (userData.permissions != "admin"){
-    //     ctx.res.writeHead(302, { Location: "/"});
-    //     ctx.res.end();
-    //     return { props: {}};
-    // }
 
     return {
         props: {
@@ -102,7 +96,7 @@ export default function dashboard(props) {
                             </svg>
                             <span
                                 className="ml-2 capitalize font-medium">
-                                dashboard
+                                overview
                             </span>
                         </button>
                     </li>
@@ -124,7 +118,9 @@ export default function dashboard(props) {
                             </span>
                         </button>
                     </li>
+                    
 
+                    { props.permissions && props.permissions === "admin" ? 
                     <li className={getCSSClasses("DashboardUsers")}>
                         {/* <button onClick={() => setCurrentSection("DashboardUsers")} className="flex focus:outline-none"> */}
                         <button className="flex focus:outline-none">
@@ -136,13 +132,14 @@ export default function dashboard(props) {
                             </svg>
                             <span className="ml-2 capitalize font-medium text-gray-400">users</span>
                         </button>
-                    </li>
+                    </li> : null
+                    }
 
                 </ul>
 
                 <div className="mt-auto flex items-center text-red-700 dark:text-red-400">
                     {/* <!-- important action --> */}
-                    <a href="#home" className="flex items-center">
+                    <button onClick={async () => await signOut()} className="flex items-center">
                         <svg className="fill-current h-5 w-5" viewBox="0 0 24 24">
                             <path
                                 d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 012
@@ -150,7 +147,7 @@ export default function dashboard(props) {
                                 0 012-2h9z"></path>
                         </svg>
                         <span className="ml-2 capitalize font-medium">log out</span>
-                    </a>
+                    </button>
 
                 </div>
             </nav>

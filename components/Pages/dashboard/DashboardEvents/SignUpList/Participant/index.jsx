@@ -1,7 +1,10 @@
 import React from 'react';
+import { useAuth } from '../../../../../../contexts/AuthContext';
 import { EditButton } from './EditButton';
 
 export default function Participant({uid, name, email, profile, status, type, updateSignups}) {
+
+    const { user } = useAuth();
 
     const statusColor = status === "signed up" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800";
     return (
@@ -31,7 +34,7 @@ export default function Participant({uid, name, email, profile, status, type, up
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
-                <EditButton uid={uid} updateSignups={updateSignups}/>
+                { user && user.permissions === "admin" ? <EditButton uid={uid} updateSignups={updateSignups}/> : null}
                 
             </td>
         </tr>

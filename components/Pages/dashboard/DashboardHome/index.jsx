@@ -17,10 +17,10 @@ export default function DashboardHome() {
                     </div>
                     
 
-                    <h4 className="my-4 text-4xl text-black text-bold">TechHacks' Secret Portal</h4>
-                    {/* <div className="my-4 text-xl text-white text-center bg-black border-black border-4 p-3 rounded-lg w-full md:w-1/3">
-                        Charts will be coming soon!
-                    </div> */}
+                    <h4 className="my-4 text-4xl text-black text-bold"><span className="font-bold">TechHack</span>s' Secret Portal <span className="text-orange-600 font-thin">BETA</span></h4>
+                    <div className="my-4 text-xl text-white text-center bg-black border-black border-4 p-3 rounded-lg w-full md:w-1/2">
+                        Use the left navigation bar to check your registration! 
+                    </div>
 
                 </div>
 
