@@ -1,5 +1,5 @@
-// const windmill = require('@windmill/react-ui/config');
-module.exports = {
+const windmill = require('@windmill/react-ui/config');
+module.exports = windmill({
   future: {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
@@ -10,4 +10,4 @@ module.exports = {
   },
   variants: {},
   plugins: [],
-}
+});

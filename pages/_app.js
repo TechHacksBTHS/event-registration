@@ -25,7 +25,7 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
   return (
-    // <Windmill>
+    <Windmill>
       <AuthContextProvider>
         <Layout>
           <RegistrationModalContextProvider>
@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }) {
           </RegistrationModalContextProvider>
         </Layout>
       </AuthContextProvider>
-    // </Windmill>
+    </Windmill>
   );
 }
 
