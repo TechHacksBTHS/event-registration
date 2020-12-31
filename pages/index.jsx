@@ -19,6 +19,15 @@ export default function Home() {
         <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
           <img src="images/sponsor-logos/wolfram.png" alt="Wolfram"/>
         </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/Magoosh.png" alt="Magoosh"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/linode.png" alt="Linode"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/balsamiq.png" alt="Balsamiq"/>
+        </div>
       </div>
 
     </div>

@@ -27,7 +27,7 @@ const events = () => {
                 ...doc.data()
             }));
             setUpComingEvents(events);
-        })
+        });
     }, []);
 
     return (

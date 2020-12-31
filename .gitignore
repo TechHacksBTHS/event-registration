@@ -1,5 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+#builds
+/out_functions
+/out_publish
+
+# secrets
+FirebaseAdminSecrets.json
+
 # environment variables
 .env.*
 .env
@@ -36,3 +43,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Local Netlify folder
+.netlify
