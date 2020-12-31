@@ -10,13 +10,13 @@ const toggleNav = () => {
 const Nav = () => {
 
     const activeClasses = "px-3 py-2 sm:flex-grow rounded-md text-lg sm:text-sm font-medium leading-5 text-white bg-gray-900 focus:outline-none";
-    const nonActiveClasses = "px-3 py-2 sm:flex-grow rounded-md text-lg sm:text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none";
+    const nonActiveClasses = "px-3 py-2 sm:flex-grow rounded-md text-lg sm:text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-900 focus:outline-none";
 
     const router = useRouter();
     const { user } = useAuth();
 
     return (
-        <nav className="bg-gray-800">
+        <nav className="bg-gray-700">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between min-h-full sm:h-16 py-3">
                     <div className="flex-1 flex flex-col sm:mt-1 sm:flex-row items-center justify-center sm:items-stretch sm:justify-start">

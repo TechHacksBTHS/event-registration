@@ -9,8 +9,7 @@ export const EventRegistrationModal = (props) => {
     const dispatchAlert = useContext(RegistrationAlertContext).dispatch;
 
     const { user } = useAuth();
-    console.log(user);
-
+    
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");

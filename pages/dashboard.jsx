@@ -55,12 +55,11 @@ export default function dashboard(props) {
     }
 
     return (
-        <div className="h-screen w-full flex overflow-hidden">
+        <div className="min-h-screen w-full flex overflow-hidden">
             <nav className="flex flex-col bg-gray-200 dark:bg-gray-900 w-64 px-12 pt-4 pb-6">
                 {/* <!-- SideNavBar --> */}
 
                 <div className="flex flex-row border-b items-center justify-between pb-2">
-                    {/* <!-- Hearder --> */}
                     <span className="text-lg font-semibold capitalize dark:text-gray-300">
                         my dashboard
                     </span>

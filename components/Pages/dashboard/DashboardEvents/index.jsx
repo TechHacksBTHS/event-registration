@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import EventList from './EventList';
-import SignUpList from './SignUpList';
+import DetailedView from './DetailedView';
 
 export default function DashboardEvents() {
     const [detailedView, setDetailedView] = useState(-1);
@@ -8,7 +8,7 @@ export default function DashboardEvents() {
     if (detailedView == -1){
         return <EventList setDetailedView={setDetailedView} />;
     } else {
-        return <SignUpList detailedView={detailedView} setDetailedView={setDetailedView} />
+        return <DetailedView detailedView={detailedView} setDetailedView={setDetailedView} />
     }
     
 }

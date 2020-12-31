@@ -1,6 +1,8 @@
 import Layout from '../components/Layout';
 import '../styles/globals.css';
 import '../components/Layout';
+// import { Windmill } from '@windmill/react-ui';
+
 import RegistrationModalContextProvider from '../contexts/RegistrationModalContext';
 import RegistrationAlertContextProvider from '../contexts/RegistrationAlertContext';
 import AuthContextProvider from '../contexts/AuthContext';
@@ -23,15 +25,17 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthContextProvider>
-      <Layout>
-        <RegistrationModalContextProvider>
-          <RegistrationAlertContextProvider>
-            <Component {...pageProps} />
-          </RegistrationAlertContextProvider>
-        </RegistrationModalContextProvider>
-      </Layout>
-    </AuthContextProvider>
+    // <Windmill>
+      <AuthContextProvider>
+        <Layout>
+          <RegistrationModalContextProvider>
+            <RegistrationAlertContextProvider>
+              <Component {...pageProps} />
+            </RegistrationAlertContextProvider>
+          </RegistrationModalContextProvider>
+        </Layout>
+      </AuthContextProvider>
+    // </Windmill>
   );
 }
 

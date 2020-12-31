@@ -1,11 +1,14 @@
 import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../../../../contexts/AuthContext';
+import EventControl from './EventControl';
 import Participant from './Participant';
 
-export default function SignUpList({detailedView, setDetailedView}) {
+export default function DetailedView({detailedView, setDetailedView}) {
 
     const [responses, setResponses] = useState([]);
+
+    const { user } = useAuth();
 
     const updateSignups = async () => {
         Axios.get("/api/signups/" + detailedView).then((result) => {
@@ -24,9 +27,9 @@ export default function SignUpList({detailedView, setDetailedView}) {
     const renderParticipants = () => {
         const { user } = useAuth();
 
-        if (user.permissions !== "admin" && responses.length == 0){
+        if (user && user.permissions !== "admin" && responses.length == 0){
             return [
-                <Participant updateSignups={updateSignups} name={user.name} email={user.email} profile={"https://i.pinimg.com/originals/ee/e7/5d/eee75d6e875e7e205a1394aaa96fad12.png"} status={"not signed up"} type={user.permissions} />
+                <Participant key={Math.random() * 100} updateSignups={updateSignups} name={user.name} email={user.email} profile={"https://i.pinimg.com/originals/ee/e7/5d/eee75d6e875e7e205a1394aaa96fad12.png"} status={"not signed up"} type={user.permissions} />
             ]
         }
 
@@ -41,10 +44,15 @@ export default function SignUpList({detailedView, setDetailedView}) {
     return (
             <div className="mx-10 my-8 flex-1">
                 <div className="flex flex-col">
-                    <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+
+                    <h2 className="text-4xl mb-4">Detailed View</h2>
+
+                    { user && user.permissions === "admin" ? <EventControl uid={detailedView}/> : null }
+                    
+                    <div className="my-8 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div className="py-2 align-middle inline-block w-full sm:px-6 lg:px-8">
                             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                <table className="min-w-full divide-y divide-gray-200">
+                                <table className="w-full divide-y divide-gray-200">
 
                                     <thead className="bg-gray-50">
                                         <tr>
