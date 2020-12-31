@@ -9,7 +9,6 @@
     "postbuild": "next-on-netlify"
   },
   "dependencies": {
-    "@windmill/react-ui": "^0.5.0",
     "axios": "^0.21.0",
     "date-fns": "^2.16.1",
     "firebase": "^8.0.0",
