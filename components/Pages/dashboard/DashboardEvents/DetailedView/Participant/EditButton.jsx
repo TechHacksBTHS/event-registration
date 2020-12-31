@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-
-const removeParticipant = async (uid) => {
-    await axios.delete("/api/signups/" + uid);
-}
+import SmallSucessAlert from '../../../../../Alerts/SmallSucessAlert';
 
 export const EditButton = ({ uid, updateSignups }) => {
     const [enabledOptions, setEnabledOptions] = useState(false);
 
-    // console.log(updateSignups);
+    const [showAlert, setShowAlert] = useState(-1);
+
+    const removeParticipant = async () => {
+        return await axios.delete("/api/signups/" + uid);
+    }
 
     return (
         <div className="inline-block text-left">
@@ -23,14 +24,21 @@ export const EditButton = ({ uid, updateSignups }) => {
                     <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         <button className="block uppercase w-full px-4 py-2 text-lg tracking-wider text-orange-500 bg-gray-100 hover:bg-orange-500 hover:text-white" role="menuitem">Edit</button>
                         <button onClick={async () => {
-                            await removeParticipant(uid);
+                            const result = await removeParticipant();
                             setEnabledOptions(false);
-                            await updateSignups();
+
+                            updateSignups();
+
+                            if (result.status == 200){
+                                setShowAlert(1);
+                            }
                             }} className="block uppercase w-full px-4 py-2 text-lg bg-gray-100 text-red-700 hover:bg-red-700 hover:text-white" role="menuitem">Remove</button>
                     </div>
                 </div>
                 : null
             }
+
+            { showAlert == 1 ? <SmallSucessAlert content={"Participant removed!"} toggle={() => setShowAlert(-1)} /> : null}
             
         </div>
     )

@@ -1,4 +1,3 @@
-import { Input, Label, Select, Textarea, Button } from '@windmill/react-ui'
 import { enUS } from 'date-fns/locale';
 import React, { useEffect, useState } from 'react'
 import { DatePicker } from 'react-nice-dates'
@@ -6,6 +5,7 @@ import Firebase from 'firebase/app';
 import 'react-nice-dates/build/style.css'
 
 import Axios from 'axios';
+import SmallSucessAlert from '../../../../../Alerts/SmallSucessAlert';
 
 export default function EventControl({ uid }) {
 
@@ -15,6 +15,8 @@ export default function EventControl({ uid }) {
     const [status, setStatus] = useState("");
     const [sponsors, setSponsors] = useState(0);
     const [date, setDate] = useState(new Date());
+
+    const [showAlert, setShowAlert] = useState(-1); // -1:none, 1:success, 2:failure
 
     const fetchEventDetails = () => {
         Axios.get("/api/events/" + uid).then((result) => {
@@ -32,10 +34,13 @@ export default function EventControl({ uid }) {
         await fetchEventDetails();
     }, []);
 
-    const saveDetails = async () => {
+    const saveDetails = async (e) => {
+        e.preventDefault();
         const timestamp = Firebase.firestore.Timestamp.fromDate(date);
-        await Axios.put("/api/events/" + uid, {name, type, description, date: timestamp, sponsors, status});
-        // await fetchEventDetails();
+        const result = await Axios.put("/api/events/" + uid, {name, type, description, date: timestamp, sponsors, status});
+        if (result.status == 200){
+            setShowAlert(1);
+        }
     }
 
     return (
@@ -58,63 +63,53 @@ export default function EventControl({ uid }) {
                             <div className="grid grid-cols-6 gap-6">
 
                                 <div className="col-span-6 sm:col-span-3">
-                                    <Label>
-                                        <span>Event Name</span>
-                                        <Input className="mt-1" value={name} onChange={(e) => setName(e.target.value)}/>
-                                    </Label>
+                                    <label htmlFor="event-name" className="block text-sm font-medium text-gray-700">Event Name</label>
+                                    <input type="text" name="event-name" value={name} onChange={(e) => setName(e.target.value)} class="mt-1 border-2 h-10 block w-full shadow-sm px-3 sm:text-sm border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
                                 </div>
 
                                 <div className="col-span-6 sm:col-span-3">
-                                    <Label>
-                                        <span>Event Type</span>
-                                        <Select className="mt-1" onChange={(e) => setType(e.target.value)} value={type}>
-                                            <option value="hackathon">Hackathon</option>
-                                        </Select>
-                                    </Label>
+                                    <label htmlFor="event-type" className="block text-sm font-medium text-gray-700">Event Type</label>
+                                    <select name="event-type" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" onChange={(e) => setType(e.target.value)} value={type}>
+                                        <option value="hackathon">Hackathon</option>
+                                    </select>
                                 </div>
 
                                 <div className="col-span-6">
-                                    <Label>
-                                        <span>Event Description</span>
-                                        <Textarea className="mt-1" rows="3" placeholder="Enter some event descriptions." value={description} onChange={(e) => setDescription(e.target.value)}/>
-                                    </Label>
+                                    <label htmlFor="event-desc">Description</label>
+                                    <textarea name="event-desc" rows="3" className="shadow-sm focus:outline-none focus:ring-indigo-500 border-2 p-2 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Enter some event descriptions." value={description} onChange={(e) => setDescription(e.target.value)}/>
                                 </div>
 
                                 <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                                    <Label>
-                                        <span>Event Date</span>
-                                        <DatePicker date={date} onDateChange={setDate} locale={enUS} format='MM/dd/yyyy HH:mm'>
-                                            {({ inputProps }) => <Input className="mt-1" {...inputProps}/>}
-                                        </DatePicker>
-                                    </Label>
+                                    <label htmlFor="event-date">Date</label>
+                                    <DatePicker date={date} onDateChange={setDate} locale={enUS} format='MM/dd/yyyy HH:mm'>
+                                        {({ inputProps }) => <input className="mt-1 border-2 h-10 block w-full shadow-sm px-3 sm:text-sm border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" {...inputProps}/>}
+                                    </DatePicker>
                                 </div>
 
                                 <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                                    <Label>
-                                        <span>Status</span>
-                                        <Select className="mt-1" value={status} onChange={(e) => setStatus(e.target.value)}>
-                                            <option value="In Work">In Work</option>
-                                            <option value="Completed">Completed</option>
-                                        </Select>
-                                    </Label>
+                                    <label htmlFor="event-status">Status</label>
+                                    <select className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value={status} onChange={(e) => setStatus(e.target.value)}>
+                                        <option value="In Work">In Work</option>
+                                        <option value="Completed">Completed</option>
+                                    </select>
                                 </div>
 
                                 <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                                    <Label>
-                                        <span>Sponsors</span>
-                                        <Input className="mt-1" value={sponsors} onChange={(e) => setSponsors(e.target.value)} />
-                                    </Label>
+                                    <label htmlFor="event-sponsors">Sponsors</label>
+                                    <input value={sponsors} onChange={(e) => setSponsors(e.target.value)} className="mt-1 border-2 h-10 block w-full shadow-sm px-3 sm:text-sm border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
                                 </div>
 
                                 </div>
                             </div>
 
                             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                <Button onClick={() => saveDetails()}>Save</Button>
+                                <button onClick={async (e) => await saveDetails(e)} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
                             </div>
                             
                         </div>
                     </form>
+
+                    { showAlert == 1 ? <SmallSucessAlert content="Event Updated!" toggle={() => setShowAlert(-1)} /> : null }
                 </div>
             </div>
         </div>
