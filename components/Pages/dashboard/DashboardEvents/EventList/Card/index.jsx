@@ -42,7 +42,7 @@ export default function DashboardCard({logo, name, uid, type, date, showSignups}
                     dark:text-gray-400">
                     <span>event date</span>
                     <span className="mt-2 text-green-400 dark:text-green-200">
-                        {date.toDateString() + " " + date.toLocaleTimeString() + " ET"}
+                        {date.toDateString()}
                     </span>
                 </div>
 

@@ -6,6 +6,7 @@ import nookies from 'nookies';
 import firebaseAdmin from '../config/FirebaseAdminConfig';
 import { fetchUserWithUID } from '../pages/api/fetch_user/[uid]';
 import { signOut } from '../services/frontend/authentication';
+import FloatingActionButton from '../components/Buttons/FloatingActionButton';
 
 export const getServerSideProps = async (ctx) => {
     try {
@@ -34,6 +35,7 @@ export const getServerSideProps = async (ctx) => {
 
 export default function dashboard(props) {
     const [currentSection, setCurrentSection] = useState("DashboardHome");
+    const [enabledSideMenu, setEnabledSideMenu] = useState(false);
 
     const showCurrentSection = () => {
         if (currentSection === "DashboardHome"){
@@ -54,9 +56,16 @@ export default function dashboard(props) {
         return "mt-8";
     }
 
+    const toggleSideMenu = () => {
+        setEnabledSideMenu(!enabledSideMenu);
+    }
+
     return (
-        <div className="min-h-screen w-full flex overflow-hidden">
-            <nav className="flex flex-col bg-gray-200 dark:bg-gray-900 w-64 px-12 pt-4 pb-6">
+        <div className="min-h-screen w-full flex overflow-x-hidden">
+
+            <FloatingActionButton action={toggleSideMenu} />
+
+            <nav className={(enabledSideMenu ? "flex " : "hidden lg:flex ") + "flex-col bg-gray-200 dark:bg-gray-900 w-64 px-12 pt-4 pb-6"}>
                 {/* <!-- SideNavBar --> */}
 
                 <div className="flex flex-row border-b items-center justify-between pb-2">
@@ -69,7 +78,7 @@ export default function dashboard(props) {
                     {/* <!-- User info --> */}
                     <img
                         className="h-12 w-12 rounded-full object-cover"
-                        src={props.accountIcon}
+                        src={ props.accountIcon }
                         alt="profile" />
                     <h2
                         className="mt-4 text-xl dark:text-gray-300 font-extrabold capitalize">
