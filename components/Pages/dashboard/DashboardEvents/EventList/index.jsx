@@ -43,7 +43,7 @@ export default function EventList({setDetailedView}) {
                     </div>
 
                     <div
-                        className="mt-6 flex justify-between text-gray-600 dark:text-gray-400">
+                        className="mt-6 hidden lg:flex justify-between text-gray-600 dark:text-gray-400">
                         {/* <!-- List sorting --> */}
 
                         <div className="ml-10 pl-2 flex capitalize">

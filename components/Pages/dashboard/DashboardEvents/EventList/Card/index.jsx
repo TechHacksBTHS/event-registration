@@ -5,11 +5,12 @@ export default function DashboardCard({logo, name, uid, type, date, showSignups}
 
     return (
         <div
-            className="mt-8 mb-4 flex px-4 py-4 justify-between bg-white
+            className="mt-8 mb-4 px-4 py-4 flex flex-col md:flex-row justify-between bg-white
             dark:bg-gray-600 shadow-xl rounded-lg cursor-pointer text-xl" onClick={() => showSignups(uid)}>
+                
             {/* <!-- Card --> */}
 
-            <div className="flex justify-between">
+            <div className="flex flex-col md:flex-row justify-between items-center">
                 {/* <!-- Left side --> */}
 
                 <img className="h-12 w-12 rounded-full object-cover place-self-center" src={logo} alt="logo"/>
@@ -35,7 +36,7 @@ export default function DashboardCard({logo, name, uid, type, date, showSignups}
 
             </div>
 
-            <div className="flex">
+            <div className="flex flex-col md:flex-row items-center">
                 {/* <!-- Rigt side --> */}
                 <div
                     className="mr-8 flex flex-col capitalize text-gray-600
