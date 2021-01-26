@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './index.module.css';
 
 export default function DashboardHome() {
     return (
@@ -17,10 +18,12 @@ export default function DashboardHome() {
                         dark:text-gray-400 border-b dark:border-gray-600">
                     </div>
                     
-
-                    <h4 className="my-4 text-4xl text-black text-bold overflow-hidden"><span className="font-bold">TechHacks</span>' Portal <span className="text-orange-600 font-thin">BETA</span></h4>
-                    <div className="my-4 text-xl text-white text-center bg-black border-black border-4 p-3 rounded-lg w-full">
-                        Use the left navigation bar to check your registration! 
+                    
+                    <div className={styles.content}>
+                        <h4 className="my-4 text-4xl text-black text-bold overflow-hidden"><span className="font-bold">TechHacks</span>' Portal <span className="text-orange-600 font-thin">BETA</span></h4>
+                        <div className="my-4 text-xl text-white text-center bg-black border-black border-4 p-3 rounded-lg w-full">
+                            Use the left navigation bar to check your registration! 
+                        </div>
                     </div>
 
                 </div>
