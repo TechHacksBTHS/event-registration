@@ -21,8 +21,8 @@ const Nav = () => {
                 <div className="relative flex items-center justify-between min-h-full sm:h-16 py-3">
                     <div className="flex-1 flex flex-col sm:mt-1 sm:flex-row items-center justify-center sm:items-stretch sm:justify-start">
                         <div className="flex-shrink-0">
-                            <img className="block lg:hidden h-10 w-auto" src="logo.svg" alt="TechHacks logo" />
-                            <img className="hidden lg:block h-10 w-auto" src="logo.svg" alt="TechHacks logo" />
+                            <img className="block lg:hidden h-10 w-auto" src="/logo.svg" alt="TechHacks logo" />
+                            <img className="hidden lg:block h-10 w-auto" src="/logo.svg" alt="TechHacks logo" />
                         </div>
                         
                         <div className="block absolute right-0 sm:hidden">
@@ -34,8 +34,8 @@ const Nav = () => {
                         <div id="nav-content" className="hidden sm:block sm:ml-6 w-4/5 sm:w-4">
                             <div className="flex flex-col sm:flex-row">
                                 <Link href="/"><button className={router.pathname == "/" ? activeClasses : nonActiveClasses}>Home</button></Link>
-                                { user ? <Link href="/dashboard"><button className={router.pathname == "/dashboard" ? activeClasses + " sm:ml-4" : nonActiveClasses + " sm:ml-4"}>Dashboard</button></Link> : null}
-                                <Link href="/events"><button className={router.pathname == "/events" ? activeClasses + " sm:ml-4" : nonActiveClasses + " sm:ml-4"}>Events</button></Link>
+                                { user ? <Link href="/dashboard/overview"><button className={router.pathname.includes("/dashboard") ? activeClasses + " sm:ml-4" : nonActiveClasses + " sm:ml-4"}>Dashboard</button></Link> : null}
+                                <Link href="/events"><button className={router.pathname === "/events" ? activeClasses + " sm:ml-4" : nonActiveClasses + " sm:ml-4"}>Events</button></Link>
                             </div>
                         </div>
 

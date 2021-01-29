@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from '../../../../../../contexts/AuthContext';
+import { useAuth } from '../../../contexts/AuthContext';
 import { EditButton } from './EditButton';
 
 export default function Participant({uid, name, email, profile, status, type, updateSignups}) {

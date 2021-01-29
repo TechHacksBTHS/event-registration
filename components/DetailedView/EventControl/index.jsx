@@ -5,7 +5,7 @@ import Firebase from 'firebase/app';
 import 'react-nice-dates/build/style.css'
 
 import Axios from 'axios';
-import SmallSucessAlert from '../../../../../Alerts/SmallSucessAlert';
+import SmallSucessAlert from '../../Alerts/SmallSucessAlert';
 
 export default function EventControl({ uid }) {
 
