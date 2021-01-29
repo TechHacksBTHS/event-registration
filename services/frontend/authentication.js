@@ -6,7 +6,7 @@ const provider = new Fire.auth.GoogleAuthProvider();
 const signInWithGoogleOAuth = async () => {
     const result = await Fire.auth().signInWithPopup(provider);
     await createUser(result);
-    Router.push("/dashboard");
+    Router.push("/dashboard/overview");
 }
 
 const signOut = async () => {

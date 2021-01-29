@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import DashboardCard from '../../../components/EventList/Card';
+import DashboardCard from '../../../components/DashboardCard';
 import fire from '../../../config/fire-config';
 import nookies from 'nookies';
 import firebaseAdmin from '../../../config/FirebaseAdminConfig';
