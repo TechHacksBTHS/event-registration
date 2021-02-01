@@ -25,9 +25,9 @@ const Nav = () => {
                             <img className="hidden lg:block h-10 w-auto" src="/logo.svg" alt="TechHacks logo" />
                         </div>
                         
-                        <div className="block absolute right-0 sm:hidden">
+                        <div className="block absolute right-0 top-0 m-6 sm:hidden">
                             <button id="nav-toggle" className="flex items-center px-3 py-2 border rounded text-white border-white" onClick={() => toggleNav()}>
-                                <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+                                <i className="fill-current fi fi-sr-menu-burger"></i>
                             </button>
                         </div>
 
@@ -45,12 +45,7 @@ const Nav = () => {
                                 { user == null ? 
                                 <button onClick={ async () => await signInWithGoogleOAuth()} className={nonActiveClasses}>Sign In</button> : 
                                     <button onClick={ async () => await signOut()} className={nonActiveClasses + " flex items-center"}>
-                                        <svg className="fill-current h-5 w-5" viewBox="0 0 24 24">
-                                            <path
-                                                d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 012
-                                                2v2h-2V4H5v16h9v-2h2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2
-                                                0 012-2h9z"></path>
-                                        </svg>
+                                        <i className="fi fi-sr-sign-out"></i>
                                         <span className="mx-2">Log Out</span>
                                     </button>
                                 }

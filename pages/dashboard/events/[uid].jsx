@@ -57,14 +57,14 @@ export default function DetailedView({name, accountIcon, permissions}) {
         // If the user state is admin, and there are no signups
         if (user && user.permissions !== "admin" && responses.length == 0){
             return [
-                <Participant key={Math.random() * 100} updateSignups={updateSignups} name={user.name} email={user.email} profile={"https://i.pinimg.com/originals/ee/e7/5d/eee75d6e875e7e205a1394aaa96fad12.png"} status={"not signed up"} type={user.permissions} />
+                <Participant key={Math.random() * 100} updateSignups={updateSignups} name={user.name} email={user.email} profile={""} status={"not signed up"} type={user.permissions} />
             ]
         }
 
         // Return all of the signed up participants
         return responses.map((response) => {
             if (response != null){
-                return <Participant key={response.uid} uid={response.uid} updateSignups={updateSignups} name={response.user.name} email={response.user.email} profile={"https://i.pinimg.com/originals/ee/e7/5d/eee75d6e875e7e205a1394aaa96fad12.png"} status="signed up" type={response.user.permissions} />; 
+                return <Participant key={response.uid} uid={response.uid} updateSignups={updateSignups} name={response.user.name} email={response.user.email} profile={""} status="signed up" type={response.user.permissions} />; 
             }
             return null;
         });
@@ -120,6 +120,8 @@ export default function DetailedView({name, accountIcon, permissions}) {
                 <Link href="/dashboard/events">
                     <button className="text-white text-xl bg-gray-800 rounded-xl my-3 py-4 px-8">Return</button>
                 </Link>
+
+                <div style={{height: "120px"}}></div>
             </div>
         </div>
     )
