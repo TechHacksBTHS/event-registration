@@ -5,8 +5,8 @@ export default function Home() {
   return (
   <div className="w-100 py-12">
     <div className="text-center">
-      <h3 className="mt-2 text-3xl font-semibold">TechHacks</h3>
-      <h6 className="mt-4 text-xl font-semibold lg:max-auto">As representatives of the nation's largest and most prestigious STEM high school, TechHacks aims to expand student engagement in technology through hackathons, workshops, and computer science events.</h6>
+      <h3 className="mt-2 text-6xl font-semibold">TechHacks</h3>
+      <h6 className="mt-4 text-xl font-semibold lg:max-auto lg:container">As representatives of the nation's largest and most prestigious STEM high school, TechHacks aims to expand student engagement in technology through hackathons, workshops, and computer science events.</h6>
 
       <h3 className="mt-16 text-3xl font-bold">Sponsors</h3>
       <div className="flex flex-wrap items-center justify-center -mx-4 px-24 overflow-hidden">
