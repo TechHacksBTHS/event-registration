@@ -4,9 +4,14 @@ import Router from "next/router";
 const provider = new Fire.auth.GoogleAuthProvider();
 
 const signInWithGoogleOAuth = async () => {
-    const result = await Fire.auth().signInWithPopup(provider);
-    await createUser(result);
-    Router.push("/dashboard");
+    try {
+        const result = await Fire.auth().signInWithPopup(provider);
+        await createUser(result);
+    } catch (err) {
+        console.log(err);
+        return;
+    }
+    Router.push("/dashboard/overview");
 }
 
 const signOut = async () => {

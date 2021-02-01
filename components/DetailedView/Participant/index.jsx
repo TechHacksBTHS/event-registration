@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from '../../../../../../contexts/AuthContext';
+import { useAuth } from '../../../contexts/AuthContext';
 import { EditButton } from './EditButton';
 
 export default function Participant({uid, name, email, profile, status, type, updateSignups}) {
@@ -12,7 +12,8 @@ export default function Participant({uid, name, email, profile, status, type, up
             <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
                 <div className="flex-shrink-0 h-10 w-10">
-                    <img className="h-10 w-10 rounded-full" src={profile} alt="" />
+                    {/* <img className="h-10 w-10 rounded-full" src={profile} alt="" /> */}
+                    <i className="fi fi-sr-user text-3xl"></i>
                 </div>
                 <div className="ml-4">
                     <div className="text-sm font-medium text-gray-900">

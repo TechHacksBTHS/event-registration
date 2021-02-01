@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import SmallSucessAlert from '../../../../../Alerts/SmallSucessAlert';
+import SmallSucessAlert from '../../Alerts/SmallSucessAlert';
 
 export const EditButton = ({ uid, updateSignups }) => {
     const [enabledOptions, setEnabledOptions] = useState(false);
