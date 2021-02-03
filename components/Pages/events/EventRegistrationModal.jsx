@@ -12,6 +12,8 @@ export const EventRegistrationModal = (props) => {
     
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [schoolName, setSchoolName] = useState("");
+    const [gradeLevel, setGradeLevel] = useState(9);
     const [email, setEmail] = useState("");
 
     const [emailLocked, setEmailLocked] = useState(false);
@@ -53,6 +55,25 @@ export const EventRegistrationModal = (props) => {
         setLastName(value);
     }
 
+    const handleSchoolNameChange = (value) => {
+        if (value.length > 0){
+            setError({
+                ...error,
+                "schoolName": false
+            });
+        } else {
+            setError({
+                ...error,
+                "schoolName": true
+            })
+        }
+        setSchoolName(value);
+    }
+    
+    const handleGradeLevelChange = (value) => {
+        setGradeLevel(value);
+    }
+
     const handleEmailChange = (value) => {
         const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         if(value.match(mailformat)){
@@ -71,16 +92,15 @@ export const EventRegistrationModal = (props) => {
 
     const handleSubmit = () => {
 
-        if (firstName.length > 0 && lastName.length > 0 && email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
-            setFirstName("");
-            setLastName("");
-            setEmail("");
+        if (firstName.length > 0 && lastName.length > 0 && email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) && schoolName.length > 0){
             
             if (user != null){
                 fire.firestore().collection("formResponses").add({
                     eventID: props.id,
                     firstName: firstName,
                     lastName: lastName,
+                    gradeLevel: gradeLevel,
+                    schoolName: schoolName,
                     email: email,
                     userRef: fire.firestore().doc("users/" + user.uid)
                 });
@@ -89,17 +109,30 @@ export const EventRegistrationModal = (props) => {
                     eventID: props.id,
                     firstName: firstName,
                     lastName: lastName,
+                    gradeLevel: gradeLevel,
+                    schoolName: schoolName,
                     email: email,
                     userRef: null
                 });
             }
 
+            setFirstName("");
+            setLastName("");
+            setGradeLevel(9);
+            setSchoolName("");
+            setEmail("");
+
             dispatchModal({type: "DISABLE"});
             dispatchAlert({type: "SUCCESS", payload: props.name});
         } 
 
+        checkEmptyFields();
+    }
+
+    const checkEmptyFields = () => {
         let firstNameError = false;
         let lastNameError = false;
+        let schoolNameError = false;
         let emailError = false;
 
         if (firstName.length < 1){
@@ -110,6 +143,10 @@ export const EventRegistrationModal = (props) => {
             lastNameError = true;
         } 
 
+        if (schoolName.length < 1){
+            schoolNameError = true;
+        }
+
         if (!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)){
             emailError = true;
         }
@@ -118,9 +155,9 @@ export const EventRegistrationModal = (props) => {
             ...error,
             firstName: firstNameError,
             lastName: lastNameError,
+            schoolName: schoolNameError,
             email: emailError
         });
-        
     }
 
     const isLockedCSS = (field) => {
@@ -143,7 +180,7 @@ export const EventRegistrationModal = (props) => {
 
                     <div className="flex items-center w-full">
                         <div className="text-gray-900 font-bold text-3xl text-center w-full">{props.name}</div>
-                        <button onClick={() => dispatchModal({type: "DISABLE"})} className="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer">
+                        <button onClick={() => dispatchModal({type: "DISABLE"})} className="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer focus:outline-none">
                             <i className="fi fi-sr-cross"></i>
                         </button>
                     </div>
@@ -152,6 +189,7 @@ export const EventRegistrationModal = (props) => {
 
                     <form className="w-full">
                         <div className="flex flex-wrap -mx-3 mb-6">
+
                             <div className="w-full md:w-1/2 px-3 mb-3 md:mb-6">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="first-name">
                                     First Name
@@ -159,6 +197,7 @@ export const EventRegistrationModal = (props) => {
                                 <input onChange={({target}) => handleFirstNameChange(target.value)} value={firstName} className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="first-name" type="text" placeholder="Your First Name" />
                                 {error["firstName"] ? <p className="text-red-500 text-xs italic">Please fill out this field.</p> : null }
                             </div>
+                            
                             <div className="w-full md:w-1/2 px-3 mb-3 md:mb-6">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="last-name">
                                     Last Name
@@ -166,6 +205,25 @@ export const EventRegistrationModal = (props) => {
                                 <input onChange={({target}) => handleLastNameChange(target.value)} value={lastName} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="last-name" type="text" placeholder="Your Last Name" />
                                 {error["lastName"] ? <p className="text-red-500 text-xs italic">Please fill out this field.</p> : null }
                             </div>
+
+                            <div className="w-full md:w-1/2 px-3 mb-3 md:mb-6">
+                                <label htmlFor="grade-level" className="block text-sm font-medium text-gray-700">Grade Level</label>
+                                <select name="grade-level" onChange={({target}) => handleGradeLevelChange(target.value)} value={gradeLevel} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <option value="9">9th Grade (Freshmen)</option>
+                                    <option value="10">10th Grade (Sophomore)</option>
+                                    <option value="11">11th Grade (Junior)</option>
+                                    <option value="12">12th Grade (Senior)</option>
+                                </select>
+                            </div>
+
+                            <div className="w-full md:w-1/2 px-3 mb-3 md:mb-6">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="school-name">
+                                    School Name
+                                </label>
+                                <input onChange={({target}) => handleSchoolNameChange(target.value)} value={schoolName} type="text" id="school-name" className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Your School Name"/>
+                                {error["schoolName"] ? <p className="text-red-500 text-xs italic">Please fill out this field.</p> : null }
+                            </div>
+
                             <div className="w-full px-3 mb-3 md:mb-6">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
                                     Email
@@ -173,6 +231,7 @@ export const EventRegistrationModal = (props) => {
                                 <input onChange={({target}) => handleEmailChange(target.value)} value={email} disabled={(emailLocked ? "disabled" : "")} className={"appearance-none block w-full bg-gray-200 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 " + isLockedCSS("email")} id="email"  type="email" placeholder="participant@techhacks.nyc"/>
                                 {error["email"] ? <p className="text-red-500 text-xs italic">Please fill out this field with a valid email address.</p> : null }
                             </div>
+
                         </div>
                     </form>
                 </div>

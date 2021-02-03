@@ -16,7 +16,7 @@ function Card(props) {
             <div className="mb-4">
                 <p className="text-3xl text-gray-900 font-bold">{props.name}</p>
             </div>
-            <button className="text-white text-xl bg-gray-800 rounded-xl my-3 py-4 px-16 transition duration-300 hover:bg-green-400" 
+            <button className="text-white text-xl bg-gray-800 rounded-xl my-3 py-4 px-16 focus:outline-none transition duration-300 hover:bg-green-400" 
                 onClick={() => dispatch({type: "SHOW_MODAL", payload: {id: props.id, name: props.name, description: props.description}})}>
                     Attend
             </button>
