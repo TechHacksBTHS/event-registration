@@ -11,6 +11,21 @@ export default function Home() {
       <h3 className="mt-16 text-3xl font-bold">Sponsors</h3>
       <div className="flex flex-wrap items-center justify-center -mx-4 px-24 overflow-hidden">
         <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/msft.png" alt="Microsoft"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/appnexus.png" alt="AppNexus"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/alpharidge.png" alt="AlphaRidge"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/bnymellon.jpg" alt="BNY Mellon"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/crimson.jpg" alt="Crimson"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
           <img className="w-auto" src="images/sponsor-logos/echoAR-dark.png" alt="echoAR"/>
         </div>
         <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
@@ -33,21 +48,6 @@ export default function Home() {
         </div>
         <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
           <img src="images/sponsor-logos/spotify.png" alt="Spotify"/>
-        </div>
-        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
-          <img src="images/sponsor-logos/msft.png" alt="Microsoft"/>
-        </div>
-        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
-          <img src="images/sponsor-logos/appnexus.png" alt="AppNexus"/>
-        </div>
-        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
-          <img src="images/sponsor-logos/alpharidge.png" alt="AlphaRidge"/>
-        </div>
-        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
-          <img src="images/sponsor-logos/bnymellon.png" alt="BNY Mellon"/>
-        </div>
-        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
-          <img src="images/sponsor-logos/crimson.jpg" alt="Crimson"/>
         </div>
       </div>
 
