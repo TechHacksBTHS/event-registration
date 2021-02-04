@@ -28,6 +28,27 @@ export default function Home() {
         <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
           <img src="images/sponsor-logos/balsamiq.png" alt="Balsamiq"/>
         </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/vice-logo-transparent.png" alt="Vice"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/spotify.png" alt="Spotify"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/msft.png" alt="Microsoft"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/appnexus.png" alt="AppNexus"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/alpharidge.png" alt="AlphaRidge"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/bnymellon.png" alt="BNY Mellon"/>
+        </div>
+        <div className="my-4 px-8 w-2/3 min-w-full sm:w-1/2 md:w-1/4 sm:min-w-0 overflow-hidden">
+          <img src="images/sponsor-logos/crimson.jpg" alt="Crimson"/>
+        </div>
       </div>
 
     </div>
