@@ -7,27 +7,25 @@ export default function DashboardCard({logo, name, uid, type, date}) {
     date = date.toDate();
     return (
         <Link href={"/dashboard/events/" + uid}>
-            <div
-                className={styles.card + " mt-8 mb-4 px-4 py-4 flex flex-col md:flex-row justify-between bg-white dark:bg-gray-600 shadow-xl rounded-lg cursor-pointer text-xl"} 
-                >
+            <div className={styles.card + " mt-8 mb-4 px-4 py-4 flex flex-col md:flex-row justify-between bg-white dark:bg-gray-600 shadow-md rounded-lg cursor-pointer text-xl"} >
                 
                 {/* <!-- Card --> */}
                 
-                <div className="flex flex-col md:flex-row justify-between items-center">
+                <div className="flex flex-col items-center justify-between md:flex-row">
                     {/* <!-- Left side --> */}
 
-                    <img className="h-12 w-12 rounded-full object-cover place-self-center" src={logo} alt="logo"/>
+                    <img className="object-cover w-12 h-12 rounded-full place-self-center" src={logo} alt="logo"/>
 
                     <div
-                        className="md:ml-4 flex flex-col items-center capitalize text-gray-600 dark:text-gray-400">
+                        className="flex flex-col items-center text-gray-600 capitalize md:ml-4 dark:text-gray-400">
                         <span>name</span>
-                        <span className="mt-2 text-black font-bold dark:text-gray-200">
+                        <span className="mt-2 font-bold text-black dark:text-gray-200">
                             {name}
                         </span>
                     </div>
 
                     <div
-                        className="md:ml-12 flex flex-col items-center capitalize text-gray-600 dark:text-gray-400">
+                        className="flex flex-col items-center text-gray-600 capitalize md:ml-12 dark:text-gray-400">
                         <span>Type</span>
                         <span className="mt-2 text-black dark:text-gray-200">
                             {type}
@@ -36,10 +34,10 @@ export default function DashboardCard({logo, name, uid, type, date}) {
 
                 </div>
 
-                <div className="flex flex-col md:flex-row items-center">
-                    {/* <!-- Rigt side --> */}
+                <div className="flex flex-col items-center md:flex-row">
+                    {/* <!-- Right side --> */}
                     <div
-                        className="flex flex-col items-center md:mr-8 capitalize text-gray-600 dark:text-gray-400">
+                        className="flex flex-col items-center text-gray-600 capitalize md:mr-8 dark:text-gray-400">
                         <span>event date</span>
                         <span className="mt-2 text-green-400 dark:text-green-200">
                             {date.toDateString()}
