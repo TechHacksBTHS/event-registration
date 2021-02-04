@@ -172,9 +172,9 @@ export const EventRegistrationModal = (props) => {
     }
 
     return (
-        <div className="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-gray-800 transition-opacity duration-500 bg-opacity-75">
+        <div className="flex items-center justify-center overflow-scroll fixed left-0 bottom-0 w-full h-full bg-gray-800 transition-opacity duration-500 bg-opacity-75">
 
-            <div className="bg-white rounded-lg w-5/6 sm:w-3/4 xl:w-1/2">
+            <div className="bg-white rounded-lg mt-48 mb-4 w-5/6 sm:w-3/4 xl:w-1/2">
 
                 <div className="flex flex-col items-start p-4">
 
