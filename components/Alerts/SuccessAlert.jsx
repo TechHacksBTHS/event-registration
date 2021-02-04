@@ -19,7 +19,7 @@ export const SuccessAlert = (props) => {
 					Success
 				</div>
 				<div className="alert-description text-sm text-green-600">
-					You have successfully registered for {props.name}. More information will be sent to your email!
+					{props.content}
 				</div>
 			</div>
 		</div>

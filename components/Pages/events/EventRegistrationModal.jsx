@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { RegistrationModalContext } from "../../../contexts/RegistrationModalContext";
 import fire from "../../../config/fire-config";
 import { RegistrationAlertContext } from "../../../contexts/RegistrationAlertContext";
 import { useAuth } from "../../../contexts/AuthContext";
+import Axios from "axios";
 
 export const EventRegistrationModal = (props) => {
     const dispatchModal = useContext(RegistrationModalContext).dispatch;
@@ -13,12 +14,17 @@ export const EventRegistrationModal = (props) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [schoolName, setSchoolName] = useState("");
-    const [gradeLevel, setGradeLevel] = useState(9);
+    const [gradeLevel, setGradeLevel] = useState("9");
     const [email, setEmail] = useState("");
 
     const [emailLocked, setEmailLocked] = useState(false);
 
     const [error, setError] = useState({});
+
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return ()=> document.body.style.overflow = 'unset';
+     }, []);
 
     if (user != null && email !== user.email){
         setEmail(user.email); //Force the email to be the account's email
@@ -90,10 +96,20 @@ export const EventRegistrationModal = (props) => {
         setEmail(value);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
 
         if (firstName.length > 0 && lastName.length > 0 && email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) && schoolName.length > 0){
             
+            // Duplicate response check
+
+            const { data } = await Axios.get("/api/check_signup/" + props.id + "/" + email);
+            if (data.data){
+                dispatchModal({type: "DISABLE"});
+                dispatchAlert({type: "SUCCESS", payload: "You have already registered! Make sure to check your email for updates!"});
+                return;
+            }
+            
+            // Add different fields of form responses depending on if the user is logged in or not
             if (user != null){
                 fire.firestore().collection("formResponses").add({
                     eventID: props.id,
@@ -123,7 +139,7 @@ export const EventRegistrationModal = (props) => {
             setEmail("");
 
             dispatchModal({type: "DISABLE"});
-            dispatchAlert({type: "SUCCESS", payload: props.name});
+            dispatchAlert({type: "SUCCESS", payload: "You have successfully registered for " + props.name + ". More information will be sent to your email!"});
         } 
 
         checkEmptyFields();

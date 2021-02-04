@@ -13,7 +13,7 @@ const renderAlert = () => {
     }
 
     if (registrationAlert.alert === "success"){
-        return <SuccessAlert name={registrationAlert.content} />
+        return <SuccessAlert content={registrationAlert.content} />
     }
 
     return null;
