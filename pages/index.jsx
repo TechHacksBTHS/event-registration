@@ -9,7 +9,7 @@ export default function Home() {
       <h6 className="mx-48 mt-4 text-xl font-semibold lg:max-auto">As representatives of the nation's largest and most prestigious STEM high school, TechHacks aims to expand student engagement in technology through hackathons, workshops, and computer science events.</h6>
 
       <div className="flex flex-wrap px-24 -mx-4">
-        
+      
       </div>
 
       <h3 className="mt-16 text-3xl font-bold">Sponsors</h3>

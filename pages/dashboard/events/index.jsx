@@ -65,12 +65,10 @@ export default function events({ name, accountIcon, permissions }) {
                         Event list
                         </h2>
                     {/* Divider */}
-                    <div
-                        className="flex items-center justify-between pb-2 text-gray-600 border-b dark:text-gray-400 dark:border-gray-600">
+                    <div className="flex items-center justify-between pb-2 text-gray-600 border-b dark:text-gray-400 dark:border-gray-600">
                     </div>
 
-                    <div
-                        className="justify-between hidden mt-6 text-gray-600 lg:flex dark:text-gray-400">
+                    <div className="justify-between hidden mt-6 text-gray-600 lg:flex dark:text-gray-400">
                         {/* <!-- List sorting --> */}
 
                         <div className="flex pl-2 ml-10 capitalize">
@@ -80,18 +78,7 @@ export default function events({ name, accountIcon, permissions }) {
                                     <svg
                                     className="w-5 h-5 ml-1 text-green-500 fill-current dark:text-green-200"
                                     viewBox="0 0 24 24">
-                                    <path
-                                        d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2
-                                            19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z"></path>
-                                </svg>
-                            </span>
-                            <span className="flex items-center ml-24">
-                                type
-                                    <svg
-                                    className="w-5 h-5 ml-1 fill-current"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2
+                                    <path d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2
                                             19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z"></path>
                                 </svg>
                             </span>
@@ -100,13 +87,18 @@ export default function events({ name, accountIcon, permissions }) {
                         <div className="flex capitalize">
                             {/* <!-- Right side --> */}
 
-                            <span className="flex items-center mr-16">
+                            <span className="flex items-center mr-24">
+                                type
+                                    <svg className="w-5 h-5 ml-1 fill-current" viewBox="0 0 24 24">
+                                    <path d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2
+                                            19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z"></path>
+                                </svg>
+                            </span>
+
+                            <span className="flex items-center mr-40">
                                 date
-                                    <svg
-                                    className="w-5 h-5 ml-1 fill-current"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2
+                                    <svg className="w-5 h-5 ml-1 fill-current" viewBox="0 0 24 24">
+                                    <path d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2
                                             19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z"></path>
                                 </svg>
                             </span>
