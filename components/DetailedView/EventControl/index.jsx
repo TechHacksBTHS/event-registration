@@ -64,7 +64,7 @@ export default function EventControl({ uid }) {
 
                                 <div className="col-span-6 sm:col-span-3">
                                     <label htmlFor="event-name" className="block text-sm font-medium text-gray-700">Event Name</label>
-                                    <input type="text" name="event-name" value={name} onChange={(e) => setName(e.target.value)} class="mt-1 border-2 h-10 block w-full shadow-sm px-3 sm:text-sm border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+                                    <input type="text" name="event-name" value={name} onChange={(e) => setName(e.target.value)} className="mt-1 border-2 h-10 block w-full shadow-sm px-3 sm:text-sm border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
                                 </div>
 
                                 <div className="col-span-6 sm:col-span-3">

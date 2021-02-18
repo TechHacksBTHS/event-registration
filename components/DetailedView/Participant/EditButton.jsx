@@ -25,9 +25,8 @@ export const EditButton = ({ uid, updateSignups }) => {
                         {/* <button className="block uppercase w-full px-4 py-2 text-lg tracking-wider text-orange-500 bg-gray-100 hover:bg-orange-500 hover:text-white" role="menuitem">Edit</button> */}
                         <button onClick={async () => {
                             const result = await removeParticipant();
-                            setEnabledOptions(false);
-
-                            updateSignups();
+                            await setEnabledOptions(false);
+                            await updateSignups();
 
                             if (result.status == 200){
                                 setShowAlert(1);
