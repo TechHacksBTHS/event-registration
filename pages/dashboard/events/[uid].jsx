@@ -45,6 +45,7 @@ export default function DetailedView({name, accountIcon, permissions}) {
 
     const updateSignups = async () => {
         Axios.get("/api/signups/" + uid).then((result) => {
+            console.log("updating signup");
             setResponses(result.data);
         });
     }
@@ -54,10 +55,10 @@ export default function DetailedView({name, accountIcon, permissions}) {
     }, []);
 
     const renderParticipants = () => {
-        // If the user state is admin, and there are no signups
+        // If the user state is not admin, and there are no signups
         if (user && user.permissions !== "admin" && responses.length == 0){
             return [
-                <Participant key={Math.random() * 100} updateSignups={updateSignups} name={user.name} email={user.email} profile={""} status={"not signed up"} type={user.permissions} />
+                <Participant key={Math.random() * 10000} updateSignups={updateSignups} name={user.name} email={user.email} profile={""} status={"not signed up"} type={user.permissions} />
             ]
         }
 
