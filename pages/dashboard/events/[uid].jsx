@@ -77,12 +77,12 @@ export default function DetailedView({name, accountIcon, permissions}) {
     
     return (
 
-        <div className="flex w-full min-h-screen overflow-x-hidden justify-center">
+        <div className="flex w-full min-h-screen overflow-x-hidden">
 
             <SideNavBar name={name} accountIcon={accountIcon} permissions={permissions} />
 
             { isFetching ? 
-            <div className="my-24 text-center">
+            <div className="my-24 mx-auto">
                 <Preloader /> 
             </div>
             : 
