@@ -24,10 +24,9 @@ export const EditButton = ({ uid, updateSignups }) => {
                     <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                         {/* <button className="block uppercase w-full px-4 py-2 text-lg tracking-wider text-orange-500 bg-gray-100 hover:bg-orange-500 hover:text-white" role="menuitem">Edit</button> */}
                         <button onClick={async () => {
-                            const result = await removeParticipant();
-                            setEnabledOptions(false);
-
-                            updateSignups();
+                            const result = await removeParticipant(); // Remove the participant
+                            await setEnabledOptions(false); // Close the popup
+                            await updateSignups(); // Update the signup list immediately
 
                             if (result.status == 200){
                                 setShowAlert(1);

@@ -94,8 +94,9 @@ export default async (req, res) => {
         await firebaseAdmin.firestore().collection("formResponses").doc(uid).delete();
         res.statusCode = 200;
         res.json("success");
+      } else {
+        res.statusCode = 401;
       }
-      res.statusCode = 401;
     } catch(err) {
       console.log(err);
       res.statusCode = 401;

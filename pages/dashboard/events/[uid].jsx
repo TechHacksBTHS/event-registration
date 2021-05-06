@@ -45,6 +45,7 @@ export default function DetailedView({name, accountIcon, permissions}) {
 
     const updateSignups = async () => {
         Axios.get("/api/signups/" + uid).then((result) => {
+            console.log("updating signup");
             setResponses(result.data);
         });
     }
@@ -54,10 +55,10 @@ export default function DetailedView({name, accountIcon, permissions}) {
     }, []);
 
     const renderParticipants = () => {
-        // If the user state is admin, and there are no signups
+        // If the user state is not admin, and there are no signups
         if (user && user.permissions !== "admin" && responses.length == 0){
             return [
-                <Participant key={Math.random() * 100} updateSignups={updateSignups} name={user.name} email={user.email} profile={""} status={"not signed up"} type={user.permissions} />
+                <Participant key={Math.random() * 10000} updateSignups={updateSignups} name={user.name} email={user.email} profile={""} status={"not signed up"} type={user.permissions} />
             ]
         }
 
@@ -72,31 +73,31 @@ export default function DetailedView({name, accountIcon, permissions}) {
     
     return (
 
-        <div className="min-h-screen w-full flex overflow-x-hidden">
+        <div className="flex w-full min-h-screen overflow-x-hidden">
 
             <SideNavBar name={name} accountIcon={accountIcon} permissions={permissions} />
 
-            <div className="mx-10 my-8 flex-1">
+            <div className="flex-1 mx-10 my-8">
                 <div className="flex flex-col">
 
-                    <h2 className="text-4xl mb-4">Detailed View</h2>
+                    <h2 className="mb-4 text-4xl">Detailed View</h2>
 
                     { user && user.permissions === "admin" ? <EventControl uid={uid}/> : null }
                     
                     <div className="my-8 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div className="py-2 align-middle inline-block w-full sm:px-6 lg:px-8">
-                            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                        <div className="inline-block w-full py-2 align-middle sm:px-6 lg:px-8">
+                            <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
                                 <table className="w-full divide-y divide-gray-200">
 
                                     <thead className="bg-gray-100">
                                         <tr>
-                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Name
                                         </th>
-                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Status
                                         </th>
-                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Role
                                         </th>
                                         <th scope="col" className="relative px-6 py-3">
@@ -118,7 +119,7 @@ export default function DetailedView({name, accountIcon, permissions}) {
                 </div>
 
                 <Link href="/dashboard/events">
-                    <button className="text-white text-xl bg-gray-800 rounded-xl my-3 py-4 px-8">Return</button>
+                    <button className="px-8 py-4 my-3 text-xl text-white bg-gray-800 rounded-xl">Return</button>
                 </Link>
 
                 <div style={{height: "120px"}}></div>

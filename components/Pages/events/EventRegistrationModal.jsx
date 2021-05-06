@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { RegistrationModalContext } from "../../../contexts/RegistrationModalContext";
 import fire from "../../../config/fire-config";
 import { RegistrationAlertContext } from "../../../contexts/RegistrationAlertContext";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useRouter } from "next/router";
+import Axios from "axios";
 
 export const EventRegistrationModal = (props) => {
     const dispatchModal = useContext(RegistrationModalContext).dispatch;
@@ -16,12 +17,17 @@ export const EventRegistrationModal = (props) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [schoolName, setSchoolName] = useState("");
-    const [gradeLevel, setGradeLevel] = useState(9);
+    const [gradeLevel, setGradeLevel] = useState("9");
     const [email, setEmail] = useState("");
 
     const [emailLocked, setEmailLocked] = useState(false);
 
     const [error, setError] = useState({});
+
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return ()=> document.body.style.overflow = 'unset';
+     }, []);
 
     if (user != null && email !== user.email){
         setEmail(user.email); //Force the email to be the account's email
@@ -93,10 +99,20 @@ export const EventRegistrationModal = (props) => {
         setEmail(value);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
 
         if (firstName.length > 0 && lastName.length > 0 && email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) && schoolName.length > 0){
             
+            // Duplicate response check
+
+            const { data } = await Axios.get("/api/check_signup/" + props.id + "/" + email);
+            if (data.data){
+                dispatchModal({type: "DISABLE"});
+                dispatchAlert({type: "SUCCESS", payload: "You have already registered! Make sure to check your email for updates!"});
+                return;
+            }
+            
+            // Add different fields of form responses depending on if the user is logged in or not
             if (user != null){
                 fire.firestore().collection("formResponses").add({
                     eventID: props.id,
@@ -125,8 +141,8 @@ export const EventRegistrationModal = (props) => {
             setSchoolName("");
             setEmail("");
 
-            dispatchAlert({type: "SUCCESS", payload: props.name});
-            router.push("/events")
+            router.push("/events");
+            dispatchAlert({type: "SUCCESS", payload: "You have successfully registered for " + props.name + ". More information will be sent to your email!"});
         } 
 
         checkEmptyFields();
@@ -175,9 +191,9 @@ export const EventRegistrationModal = (props) => {
     }
 
     return (
-        <div className="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-gray-800 transition-opacity duration-500 bg-opacity-75">
+        <div className="flex items-center justify-center overflow-scroll fixed left-0 bottom-0 w-full h-full bg-gray-800 transition-opacity duration-500 bg-opacity-75">
 
-            <div className="bg-white rounded-lg w-5/6 sm:w-3/4 xl:w-1/2">
+            <div className="bg-white rounded-lg mt-48 mb-4 w-5/6 sm:w-3/4 xl:w-1/2">
 
                 <div className="flex flex-col items-start p-4">
 
