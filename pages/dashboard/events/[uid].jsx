@@ -9,6 +9,7 @@ import nookies from 'nookies';
 import SideNavBar from '../../../components/Sidebar';
 import firebaseAdmin from '../../../config/FirebaseAdminConfig';
 import { fetchUserWithUID } from '../../api/fetch_user/[uid]';
+import Preloader from '../../../components/ProgressBar/Preloader';
 
 export const getServerSideProps = async (ctx) => {
     try {
@@ -39,18 +40,21 @@ export const getServerSideProps = async (ctx) => {
 export default function DetailedView({name, accountIcon, permissions}) {
 
     const [responses, setResponses] = useState([]);
+    const [isFetching, setIsFetching] = useState(true);
+
     const router = useRouter();
     const { uid } = router.query;
     const { user } = useAuth();
 
     const updateSignups = async () => {
-        Axios.get("/api/signups/" + uid).then((result) => {
-            console.log("updating signup");
+        await Axios.get("/api/signups/" + uid).then((result) => {
             setResponses(result.data);
         });
+        setIsFetching(false);
     }
 
     useEffect(async () => {
+        setIsFetching(true);
         await updateSignups();
     }, []);
 
@@ -73,9 +77,15 @@ export default function DetailedView({name, accountIcon, permissions}) {
     
     return (
 
-        <div className="flex w-full min-h-screen overflow-x-hidden">
+        <div className="flex w-full min-h-screen overflow-x-hidden justify-center">
 
             <SideNavBar name={name} accountIcon={accountIcon} permissions={permissions} />
+
+            { isFetching ? 
+            <div className="my-24 text-center">
+                <Preloader /> 
+            </div>
+            : 
 
             <div className="flex-1 mx-10 my-8">
                 <div className="flex flex-col">
@@ -107,9 +117,7 @@ export default function DetailedView({name, accountIcon, permissions}) {
                                     </thead>
 
                                     <tbody className="bg-white divide-y divide-gray-200">
-                                       
-                                       {renderParticipants()}
-                                        
+                                        { renderParticipants() }
                                     </tbody>
                         
                                 </table>
@@ -117,13 +125,15 @@ export default function DetailedView({name, accountIcon, permissions}) {
                         </div>
                     </div>
                 </div>
-
+                
                 <Link href="/dashboard/events">
                     <button className="px-8 py-4 my-3 text-xl text-white bg-gray-800 rounded-xl">Return</button>
                 </Link>
 
                 <div style={{height: "120px"}}></div>
             </div>
+
+            }
         </div>
     )
 }
