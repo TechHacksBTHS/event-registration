@@ -107,8 +107,8 @@ export const EventRegistrationModal = (props) => {
 
             const { data } = await Axios.get("/api/check_signup/" + props.id + "/" + email);
             if (data.data){
-                dispatchModal({type: "DISABLE"});
                 dispatchAlert({type: "SUCCESS", payload: "You have already registered! Make sure to check your email for updates!"});
+                router.push("/events");
                 return;
             }
             
