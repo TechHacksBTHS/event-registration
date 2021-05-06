@@ -3,12 +3,15 @@ import { RegistrationModalContext } from "../../../contexts/RegistrationModalCon
 import fire from "../../../config/fire-config";
 import { RegistrationAlertContext } from "../../../contexts/RegistrationAlertContext";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useRouter } from "next/router";
 
 export const EventRegistrationModal = (props) => {
     const dispatchModal = useContext(RegistrationModalContext).dispatch;
     const dispatchAlert = useContext(RegistrationAlertContext).dispatch;
 
     const { user } = useAuth();
+
+    const router = useRouter();
     
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -122,8 +125,8 @@ export const EventRegistrationModal = (props) => {
             setSchoolName("");
             setEmail("");
 
-            dispatchModal({type: "DISABLE"});
             dispatchAlert({type: "SUCCESS", payload: props.name});
+            router.push("/events")
         } 
 
         checkEmptyFields();
@@ -180,7 +183,7 @@ export const EventRegistrationModal = (props) => {
 
                     <div className="flex items-center w-full">
                         <div className="text-gray-900 font-bold text-3xl text-center w-full">{props.name}</div>
-                        <button onClick={() => dispatchModal({type: "DISABLE"})} className="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer focus:outline-none">
+                        <button onClick={() => router.push("/events")} className="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer focus:outline-none">
                             <i className="fi fi-sr-cross"></i>
                         </button>
                     </div>
