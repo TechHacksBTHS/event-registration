@@ -21,6 +21,7 @@
     "nookies": "^2.5.0",
     "nprogress": "^0.2.0",
     "react": "17.0.1",
+    "react-csv": "^2.0.3",
     "react-dom": "17.0.1",
     "react-nice-dates": "^3.0.7",
     "tailwindcss": "^1.9.6"
