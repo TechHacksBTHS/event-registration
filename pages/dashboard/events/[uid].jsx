@@ -10,6 +10,8 @@ import SideNavBar from '../../../components/Sidebar';
 import firebaseAdmin from '../../../config/FirebaseAdminConfig';
 import { fetchUserWithUID } from '../../api/fetch_user/[uid]';
 import Preloader from '../../../components/ProgressBar/Preloader';
+import { CSVLink } from 'react-csv';
+import ExportData from '../../../components/DetailedView/ExportData';
 
 export const getServerSideProps = async (ctx) => {
     try {
@@ -126,9 +128,14 @@ export default function DetailedView({name, accountIcon, permissions}) {
                     </div>
                 </div>
                 
-                <Link href="/dashboard/events">
-                    <button className="px-8 py-4 my-3 text-xl text-white bg-gray-800 rounded-xl">Return</button>
-                </Link>
+
+                <div className="flex">
+                    <Link href="/dashboard/events">
+                        <button className="px-8 py-4 my-3 mx-6 text-xl text-white bg-orange-700 rounded-xl focus:outline-none">Return</button>
+                    </Link>
+
+                    { user && user.permissions === "admin" ? <ExportData responses={responses} /> : null }
+                </div>
 
                 <div style={{height: "120px"}}></div>
             </div>

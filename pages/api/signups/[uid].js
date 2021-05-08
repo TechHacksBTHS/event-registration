@@ -30,6 +30,10 @@ const adminData = async (doc) => {
     return {
       uid: doc.id,
       eventID: doc.data().eventID,
+      firstName: doc.data().firstName,
+      lastName: doc.data().lastName,
+      schoolName: doc.data().schoolName,
+      gradeLevel: doc.data().gradeLevel,
       user: {
         name: doc.data().firstName + " " + doc.data().lastName,
         email: doc.data().email,
@@ -41,6 +45,10 @@ const adminData = async (doc) => {
       return {
         uid: doc.id,
         eventID: doc.data().eventID,
+        firstName: doc.data().firstName,
+        lastName: doc.data().lastName,
+        schoolName: doc.data().schoolName,
+        gradeLevel: doc.data().gradeLevel,
         user: {
           name: userDoc.data().name,
           email: userDoc.data().email,
