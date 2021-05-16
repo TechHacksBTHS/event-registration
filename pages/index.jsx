@@ -6,7 +6,7 @@ export default function Home() {
   <div className="py-12 w-100">
     <div className="text-center">
       <h3 className="mt-2 text-6xl font-semibold">TechHacks</h3>
-      <h6 className="mx-48 mt-4 text-xl font-semibold lg:max-auto">As representatives of the nation's largest and most prestigious STEM high school, TechHacks aims to expand student engagement in technology through hackathons, workshops, and computer science events.</h6>
+      <h6 className="mt-4 text-xl font-semibold mx-auto lg:mx-48">As representatives of the nation's largest and most prestigious STEM high school, TechHacks aims to expand student engagement in technology through hackathons, workshops, and computer science events.</h6>
 
       <div className="flex flex-wrap px-24 -mx-4">
         {/* css animated image here */}
